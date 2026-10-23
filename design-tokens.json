@@ -190,25 +190,83 @@
       "padding": {
         "sectionDesktop": "100px 60px",
         "sectionTablet": "80px 40px",
-        "sectionMobile": "40px 20px",
+        "sectionMobile": "56px 16px",
         "heroDesktop": "60px 0px",
         "heroTablet": "50px 0px",
         "heroMobile": "40px 0px",
         "workbenchDesktop": "60px",
-        "workbenchMobile": "24px",
-        "featureCard": "40px",
+        "workbenchTablet": "32px",
+        "workbenchMobile": "20px",
+        "featureCardDesktop": "40px",
+        "featureCardMobile": "20px",
         "pillButton": "16px 24px",
+        "pillButtonMobile": "12px 20px",
         "pillButtonLarge": "20px 54px",
-        "tabContainer": "16px"
+        "tabContainer": "16px",
+        "bannerMobile": "40px 20px",
+        "bannerDesktop": "80px"
       },
       "gap": {
         "sectionDesktop": "48px",
         "sectionTablet": "36px",
         "sectionMobile": "24px",
         "gridDesktop": "24px",
+        "gridMobile": "16px",
         "tickerDesktop": "20px",
+        "tickerMobile": "12px",
         "tabTrack": "8px",
         "ctaStack": "40px"
+      },
+      "componentDimensions": {
+        "marqueeTicker": {
+          "desktop": {
+            "cardWidth": "209px",
+            "trackHeight": "400px",
+            "profileCardHeight": "296px",
+            "statCardHeight": "127px",
+            "subProfileCardHeight": "250px",
+            "statNumberSize": "28px"
+          },
+          "mobile": {
+            "cardWidth": "155px",
+            "trackHeight": "270px",
+            "profileCardHeight": "195px",
+            "statCardHeight": "85px",
+            "subProfileCardHeight": "170px",
+            "statNumberSize": "20px"
+          }
+        },
+        "workbench": {
+          "tabTrackHeightDesktop": "96px",
+          "tabTrackLayoutMobile": "stacked-pills",
+          "tabRadiusMobile": "12px",
+          "tabRadiusDesktop": "120px",
+          "containerRadiusMobile": "24px",
+          "containerRadiusDesktop": "48px"
+        },
+        "navigation": {
+          "heightDesktop": "76px",
+          "heightMobile": "68px",
+          "mobileDrawer": {
+            "background": "#FFFFFF",
+            "elevation": "0px 25px 50px -12px rgba(0, 0, 0, 0.25)",
+            "zIndex": 50
+          }
+        },
+        "featureGrid": {
+          "minHeightMobile": "300px",
+          "heightDesktop": "420px",
+          "illustrationHeightMobile": "140px",
+          "illustrationHeightDesktop": "220px"
+        },
+        "testimonials": {
+          "cardWidthMobile": "82vw",
+          "cardMaxWidthMobile": "340px",
+          "cardHeightDesktop": "604px",
+          "cardHeightMobile": "auto",
+          "photoHeightMobile": "220px",
+          "photoHeightDesktop": "340px"
+        }
       },
       "zIndex": {
         "deep": 0,
@@ -216,6 +274,7 @@
         "elevated": 2,
         "dropdown": 10,
         "stickyNav": 50,
+        "mobileDrawer": 50,
         "overlayModal": 100,
         "tooltip": 200
       }
@@ -224,9 +283,14 @@
       "borderRadius": {
         "pill": "120px",
         "full": "9999px",
-        "banner": "48px",
-        "subBanner": "36px",
+        "bannerDesktop": "48px",
+        "bannerTablet": "32px",
+        "bannerMobile": "24px",
+        "subBannerDesktop": "36px",
+        "subBannerTablet": "28px",
+        "subBannerMobile": "20px",
         "container": "16px",
+        "containerMobile": "14px",
         "card": "12px",
         "button": "120px",
         "control": "8px",
@@ -244,6 +308,7 @@
         "subtle": "0px 2px 4px 0px rgba(0, 0, 0, 0.05), 0px 1px 0px 0px rgba(0, 0, 0, 0.03)",
         "card": "0px 2px 10px -3px rgba(153, 153, 153, 0.25)",
         "floating": "0px 10px 30px -10px rgba(0, 0, 0, 0.08), 0px 4px 6px -2px rgba(0, 0, 0, 0.03)",
+        "drawer": "0px 25px 50px -12px rgba(0, 0, 0, 0.25)",
         "glowCoral": "0px 0px 24px 0px rgba(247, 128, 60, 0.25)",
         "carouselCard": "0px 4px 20px 0px rgba(0, 0, 0, 0.06)"
       }

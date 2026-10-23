@@ -7,6 +7,7 @@ module.exports = {
   ],
   theme: {
     screens: {
+      'xs': '420px',
       'sm': '640px',
       'tablet': '810px',
       'md': '810px',
@@ -127,7 +128,11 @@ module.exports = {
       borderRadius: {
         'pill': '120px',
         'banner': '48px',
+        'banner-tablet': '32px',
+        'banner-mobile': '24px',
         'sub-banner': '36px',
+        'sub-banner-tablet': '28px',
+        'sub-banner-mobile': '20px',
         'container': '16px',
         'card': '12px',
         'control': '8px',
@@ -137,6 +142,7 @@ module.exports = {
         'subtle': '0px 2px 4px 0px rgba(0, 0, 0, 0.05), 0px 1px 0px 0px rgba(0, 0, 0, 0.03)',
         'card': '0px 2px 10px -3px rgba(153, 153, 153, 0.25)',
         'floating': '0px 10px 30px -10px rgba(0, 0, 0, 0.08), 0px 4px 6px -2px rgba(0, 0, 0, 0.03)',
+        'drawer': '0px 25px 50px -12px rgba(0, 0, 0, 0.25)',
         'glow-coral': '0px 0px 24px 0px rgba(247, 128, 60, 0.25)',
         'carousel-card': '0px 4px 20px 0px rgba(0, 0, 0, 0.06)'
       },

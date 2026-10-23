@@ -2,142 +2,98 @@
      OUTLIER ARCHETYPE: DUAL-CARD MARQUEE TICKER SKELETON
      Aesthetic Mechanics:
      - Continuous horizontal translate animation (marquee 35s linear infinite)
-     - Track gap: 20px
-     - Column dimension: 209px width, 400px height
+     - Desktop Dimensions: 209px width, 400px height, gap: 20px
+     - Mobile Dimensions: 155px width, 270px height, gap: 12px
      - Dual Card Composition:
-       * Type A (Profile Media Card): 209px x 296px, 12px radius, gradient overlay
-       * Type B (Metric Stat Card): 209px x 127px, 12px radius, high-saturation gradient
+       * Type A (Profile Media Card): Desktop 209px x 296px / Mobile 155px x 195px
+       * Type B (Metric Stat Card): Desktop 209px x 127px / Mobile 155px x 85px
      ========================================================================== -->
 
-<div class="w-full overflow-hidden py-4 select-none relative" aria-hidden="true">
+<div class="w-full overflow-hidden py-2 sm:py-4 select-none relative" aria-hidden="true">
   
   <!-- Edge Gradient Masking (Left & Right Fades) -->
-  <div class="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-surface-canvas to-transparent z-10 pointer-events-none"></div>
-  <div class="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-surface-canvas to-transparent z-10 pointer-events-none"></div>
+  <div class="absolute left-0 top-0 bottom-0 w-8 sm:w-16 md:w-24 bg-gradient-to-r from-surface-canvas to-transparent z-10 pointer-events-none"></div>
+  <div class="absolute right-0 top-0 bottom-0 w-8 sm:w-16 md:w-24 bg-gradient-to-l from-surface-canvas to-transparent z-10 pointer-events-none"></div>
 
   <!-- Animated Track -->
-  <div class="flex gap-5 w-max animate-marquee hover:[animation-play-state:paused]">
+  <div class="flex gap-3 sm:gap-4 md:gap-5 w-max animate-marquee hover:[animation-play-state:paused]">
     
     <!-- REPEATED SEQUENCE 1 -->
     <!-- Column 1: Profile Card -->
-    <div class="w-[209px] h-[400px] flex flex-col justify-end">
-      <div class="w-[209px] h-[296px] rounded-card bg-surface-light-300 relative overflow-hidden flex flex-col justify-end p-4 border border-border-hairline shadow-subtle">
+    <div class="w-[155px] sm:w-[185px] md:w-[209px] h-[270px] sm:h-[330px] md:h-[400px] flex flex-col justify-end">
+      <div class="w-full h-[195px] sm:h-[245px] md:h-[296px] rounded-card bg-surface-light-300 relative overflow-hidden flex flex-col justify-end p-3 sm:p-4 border border-border-hairline shadow-subtle">
         <div class="absolute inset-0 bg-gradient-to-t from-[#163F57]/90 via-[#163F57]/30 to-transparent"></div>
         <div class="relative z-10 flex flex-col gap-1.5">
-          <div class="h-4 w-20 rounded bg-white/80"></div>
-          <div class="h-3 w-28 rounded bg-white/50"></div>
+          <div class="h-3.5 sm:h-4 w-16 sm:w-20 rounded bg-white/80"></div>
+          <div class="h-2.5 sm:h-3 w-20 sm:w-28 rounded bg-white/50"></div>
         </div>
       </div>
     </div>
 
     <!-- Column 2: Stat Card (Cobalt) + Profile Mini Stack -->
-    <div class="w-[209px] h-[400px] flex flex-col justify-between">
+    <div class="w-[155px] sm:w-[185px] md:w-[209px] h-[270px] sm:h-[330px] md:h-[400px] flex flex-col justify-between">
       <!-- Metric Card: Cobalt Blue -->
-      <div class="w-[209px] h-[127px] rounded-card bg-stat-cobalt p-4 flex flex-col justify-between border border-white/10 shadow-card">
-        <div class="h-7 w-24 rounded bg-white/90"></div>
-        <div class="h-4 w-32 rounded bg-white/70"></div>
+      <div class="w-full h-[85px] sm:h-[105px] md:h-[127px] rounded-card bg-stat-cobalt p-2.5 sm:p-3.5 md:p-4 flex flex-col justify-between border border-white/10 shadow-card">
+        <div class="h-5 sm:h-7 w-20 sm:w-24 rounded bg-white/90"></div>
+        <div class="h-3 sm:h-4 w-24 sm:w-32 rounded bg-white/70"></div>
       </div>
       <!-- Profile Card Below -->
-      <div class="w-[209px] h-[250px] rounded-card bg-surface-light-300 relative overflow-hidden flex flex-col justify-end p-4 border border-border-hairline">
+      <div class="w-full h-[170px] sm:h-[210px] md:h-[250px] rounded-card bg-surface-light-300 relative overflow-hidden flex flex-col justify-end p-3 sm:p-4 border border-border-hairline">
         <div class="absolute inset-0 bg-gradient-to-t from-[#80137C]/90 via-[#80137C]/30 to-transparent"></div>
         <div class="relative z-10 flex flex-col gap-1.5">
-          <div class="h-4 w-24 rounded bg-white/80"></div>
-          <div class="h-3 w-32 rounded bg-white/50"></div>
+          <div class="h-3.5 sm:h-4 w-18 sm:w-24 rounded bg-white/80"></div>
+          <div class="h-2.5 sm:h-3 w-22 sm:w-32 rounded bg-white/50"></div>
         </div>
       </div>
     </div>
 
     <!-- Column 3: Profile Card -->
-    <div class="w-[209px] h-[400px] flex flex-col justify-end">
-      <div class="w-[209px] h-[296px] rounded-card bg-surface-light-300 relative overflow-hidden flex flex-col justify-end p-4 border border-border-hairline shadow-subtle">
+    <div class="w-[155px] sm:w-[185px] md:w-[209px] h-[270px] sm:h-[330px] md:h-[400px] flex flex-col justify-end">
+      <div class="w-full h-[195px] sm:h-[245px] md:h-[296px] rounded-card bg-surface-light-300 relative overflow-hidden flex flex-col justify-end p-3 sm:p-4 border border-border-hairline shadow-subtle">
         <div class="absolute inset-0 bg-gradient-to-t from-[#0B7525]/90 via-[#0B7525]/30 to-transparent"></div>
         <div class="relative z-10 flex flex-col gap-1.5">
-          <div class="h-4 w-20 rounded bg-white/80"></div>
-          <div class="h-3 w-28 rounded bg-white/50"></div>
+          <div class="h-3.5 sm:h-4 w-16 sm:w-20 rounded bg-white/80"></div>
+          <div class="h-2.5 sm:h-3 w-20 sm:w-28 rounded bg-white/50"></div>
         </div>
       </div>
     </div>
 
-    <!-- Column 4: Stat Card (Crimson) + Profile Mini Stack -->
-    <div class="w-[209px] h-[400px] flex flex-col justify-between">
-      <div class="w-[209px] h-[250px] rounded-card bg-surface-light-300 relative overflow-hidden flex flex-col justify-end p-4 border border-border-hairline">
+    <!-- Column 4: Profile Mini Stack + Stat Card (Crimson) -->
+    <div class="w-[155px] sm:w-[185px] md:w-[209px] h-[270px] sm:h-[330px] md:h-[400px] flex flex-col justify-between">
+      <div class="w-full h-[170px] sm:h-[210px] md:h-[250px] rounded-card bg-surface-light-300 relative overflow-hidden flex flex-col justify-end p-3 sm:p-4 border border-border-hairline">
         <div class="absolute inset-0 bg-gradient-to-t from-[#7B8F0B]/90 via-[#7B8F0B]/30 to-transparent"></div>
         <div class="relative z-10 flex flex-col gap-1.5">
-          <div class="h-4 w-24 rounded bg-white/80"></div>
-          <div class="h-3 w-32 rounded bg-white/50"></div>
+          <div class="h-3.5 sm:h-4 w-18 sm:w-24 rounded bg-white/80"></div>
+          <div class="h-2.5 sm:h-3 w-22 sm:w-32 rounded bg-white/50"></div>
         </div>
       </div>
-      <!-- Metric Card: Crimson Red -->
-      <div class="w-[209px] h-[127px] rounded-card bg-stat-crimson p-4 flex flex-col justify-between border border-white/10 shadow-card">
-        <div class="h-7 w-20 rounded bg-white/90"></div>
-        <div class="h-4 w-36 rounded bg-white/70"></div>
+      <div class="w-full h-[85px] sm:h-[105px] md:h-[127px] rounded-card bg-stat-crimson p-2.5 sm:p-3.5 md:p-4 flex flex-col justify-between border border-white/10 shadow-card">
+        <div class="h-5 sm:h-7 w-20 sm:w-24 rounded bg-white/90"></div>
+        <div class="h-3 sm:h-4 w-24 sm:w-32 rounded bg-white/70"></div>
       </div>
     </div>
 
-    <!-- Column 5: Profile Card -->
-    <div class="w-[209px] h-[400px] flex flex-col justify-end">
-      <div class="w-[209px] h-[296px] rounded-card bg-surface-light-300 relative overflow-hidden flex flex-col justify-end p-4 border border-border-hairline shadow-subtle">
-        <div class="absolute inset-0 bg-gradient-to-t from-[#0B2C8F]/90 via-[#0B2C8F]/30 to-transparent"></div>
-        <div class="relative z-10 flex flex-col gap-1.5">
-          <div class="h-4 w-20 rounded bg-white/80"></div>
-          <div class="h-3 w-28 rounded bg-white/50"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Column 6: Stat Card (Graphite) + Profile Mini Stack -->
-    <div class="w-[209px] h-[400px] flex flex-col justify-between">
-      <!-- Metric Card: Charcoal Graphite -->
-      <div class="w-[209px] h-[127px] rounded-card bg-stat-graphite p-4 flex flex-col justify-between border border-white/10 shadow-card">
-        <div class="h-7 w-16 rounded bg-white/90"></div>
-        <div class="h-4 w-24 rounded bg-white/70"></div>
-      </div>
-      <div class="w-[209px] h-[250px] rounded-card bg-surface-light-300 relative overflow-hidden flex flex-col justify-end p-4 border border-border-hairline">
-        <div class="absolute inset-0 bg-gradient-to-t from-[#222222]/90 via-[#222222]/30 to-transparent"></div>
-        <div class="relative z-10 flex flex-col gap-1.5">
-          <div class="h-4 w-20 rounded bg-white/80"></div>
-          <div class="h-3 w-32 rounded bg-white/50"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Column 7: Stat Card (Emerald Green) -->
-    <div class="w-[209px] h-[400px] flex flex-col justify-between">
-      <div class="w-[209px] h-[250px] rounded-card bg-surface-light-300 relative overflow-hidden flex flex-col justify-end p-4 border border-border-hairline">
-        <div class="absolute inset-0 bg-gradient-to-t from-[#444444]/90 via-[#444444]/30 to-transparent"></div>
-        <div class="relative z-10 flex flex-col gap-1.5">
-          <div class="h-4 w-20 rounded bg-white/80"></div>
-          <div class="h-3 w-28 rounded bg-white/50"></div>
-        </div>
-      </div>
-      <!-- Metric Card: Emerald Green -->
-      <div class="w-[209px] h-[127px] rounded-card bg-stat-emerald p-4 flex flex-col justify-between border border-white/10 shadow-card">
-        <div class="h-7 w-20 rounded bg-white/90"></div>
-        <div class="h-4 w-36 rounded bg-white/70"></div>
-      </div>
-    </div>
-
-    <!-- SEAMLESS DUPLICATE BLOCK FOR 100% INFINITE LOOP -->
-    <div class="w-[209px] h-[400px] flex flex-col justify-end">
-      <div class="w-[209px] h-[296px] rounded-card bg-surface-light-300 relative overflow-hidden flex flex-col justify-end p-4 border border-border-hairline shadow-subtle">
+    <!-- DUPLICATE SEQUENCE FOR SEAMLESS 35s LOOP -->
+    <div class="w-[155px] sm:w-[185px] md:w-[209px] h-[270px] sm:h-[330px] md:h-[400px] flex flex-col justify-end">
+      <div class="w-full h-[195px] sm:h-[245px] md:h-[296px] rounded-card bg-surface-light-300 relative overflow-hidden flex flex-col justify-end p-3 sm:p-4 border border-border-hairline shadow-subtle">
         <div class="absolute inset-0 bg-gradient-to-t from-[#163F57]/90 via-[#163F57]/30 to-transparent"></div>
         <div class="relative z-10 flex flex-col gap-1.5">
-          <div class="h-4 w-20 rounded bg-white/80"></div>
-          <div class="h-3 w-28 rounded bg-white/50"></div>
+          <div class="h-3.5 sm:h-4 w-16 sm:w-20 rounded bg-white/80"></div>
+          <div class="h-2.5 sm:h-3 w-20 sm:w-28 rounded bg-white/50"></div>
         </div>
       </div>
     </div>
 
-    <div class="w-[209px] h-[400px] flex flex-col justify-between">
-      <div class="w-[209px] h-[127px] rounded-card bg-stat-cobalt p-4 flex flex-col justify-between border border-white/10 shadow-card">
-        <div class="h-7 w-24 rounded bg-white/90"></div>
-        <div class="h-4 w-32 rounded bg-white/70"></div>
+    <div class="w-[155px] sm:w-[185px] md:w-[209px] h-[270px] sm:h-[330px] md:h-[400px] flex flex-col justify-between">
+      <div class="w-full h-[85px] sm:h-[105px] md:h-[127px] rounded-card bg-stat-cobalt p-2.5 sm:p-3.5 md:p-4 flex flex-col justify-between border border-white/10 shadow-card">
+        <div class="h-5 sm:h-7 w-20 sm:w-24 rounded bg-white/90"></div>
+        <div class="h-3 sm:h-4 w-24 sm:w-32 rounded bg-white/70"></div>
       </div>
-      <div class="w-[209px] h-[250px] rounded-card bg-surface-light-300 relative overflow-hidden flex flex-col justify-end p-4 border border-border-hairline">
+      <div class="w-full h-[170px] sm:h-[210px] md:h-[250px] rounded-card bg-surface-light-300 relative overflow-hidden flex flex-col justify-end p-3 sm:p-4 border border-border-hairline">
         <div class="absolute inset-0 bg-gradient-to-t from-[#80137C]/90 via-[#80137C]/30 to-transparent"></div>
         <div class="relative z-10 flex flex-col gap-1.5">
-          <div class="h-4 w-24 rounded bg-white/80"></div>
-          <div class="h-3 w-32 rounded bg-white/50"></div>
+          <div class="h-3.5 sm:h-4 w-18 sm:w-24 rounded bg-white/80"></div>
+          <div class="h-2.5 sm:h-3 w-22 sm:w-32 rounded bg-white/50"></div>
         </div>
       </div>
     </div>

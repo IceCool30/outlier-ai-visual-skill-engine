@@ -96,9 +96,14 @@
 
 @media (max-width: 809.98px) {
   :root {
-    --outlier-section-padding-y: 40px;
-    --outlier-section-padding-x: 20px;
+    --outlier-section-padding-y: 56px;
+    --outlier-section-padding-x: 16px;
     --outlier-section-gap: 24px;
+    --outlier-radius-banner: 24px;
+    --outlier-radius-sub-banner: 20px;
+    --outlier-radius-container: 14px;
+    --outlier-ticker-card-w: 155px;
+    --outlier-ticker-track-h: 270px;
   }
 }
 
