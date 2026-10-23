@@ -1,0 +1,76 @@
+<!-- ==========================================================================
+     OUTLIER ARCHETYPE: MULTI-COLUMN SUBSTRATE FOOTER SKELETON
+     Aesthetic Mechanics:
+     - Surface: linear-gradient(180deg, #FFFFFF 31%, #EEEEEE 100%)
+     - Padding: 80px 60px 40px (Desktop), 50px 24px 30px (Mobile)
+     - Link Accent Hover: #CF6325 (brand-link)
+     - Hierarchy: Brand metadata top left, link column cluster right, legal bar bottom
+     ========================================================================== -->
+
+<footer class="w-full bg-footer-fade border-t border-border-hairline pt-20 pb-12 px-6 md:px-14 flex flex-col items-center">
+  <div class="max-w-page w-full mx-auto flex flex-col gap-16">
+    
+    <!-- Upper Grid: Brand Meta + Link Columns -->
+    <div class="w-full grid grid-cols-1 md:grid-cols-5 gap-12">
+      
+      <!-- Column 1: Brand & Parent Entity Anchor (2 spans) -->
+      <div class="md:col-span-2 flex flex-col gap-6">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-lg bg-content-primary flex items-center justify-center">
+            <div class="w-3.5 h-3.5 rounded-full bg-brand-primary"></div>
+          </div>
+          <div class="h-5 w-24 rounded bg-surface-light-400"></div>
+        </div>
+        <div class="space-y-2">
+          <div class="w-48 h-3.5 rounded bg-content-tertiary/40"></div>
+          <div class="w-64 h-3.5 rounded bg-content-tertiary/30"></div>
+        </div>
+      </div>
+
+      <!-- Column 2: Navigation Category -->
+      <div class="flex flex-col gap-4">
+        <div class="w-20 h-4 rounded bg-content-primary"></div>
+        <div class="space-y-3">
+          <div class="w-24 h-3.5 rounded bg-content-tertiary/50 hover:bg-brand-link transition-colors cursor-pointer"></div>
+          <div class="w-28 h-3.5 rounded bg-content-tertiary/50 hover:bg-brand-link transition-colors cursor-pointer"></div>
+          <div class="w-20 h-3.5 rounded bg-content-tertiary/50 hover:bg-brand-link transition-colors cursor-pointer"></div>
+          <div class="w-24 h-3.5 rounded bg-content-tertiary/50 hover:bg-brand-link transition-colors cursor-pointer"></div>
+        </div>
+      </div>
+
+      <!-- Column 3: Navigation Category -->
+      <div class="flex flex-col gap-4">
+        <div class="w-24 h-4 rounded bg-content-primary"></div>
+        <div class="space-y-3">
+          <div class="w-32 h-3.5 rounded bg-content-tertiary/50 hover:bg-brand-link transition-colors cursor-pointer"></div>
+          <div class="w-28 h-3.5 rounded bg-content-tertiary/50 hover:bg-brand-link transition-colors cursor-pointer"></div>
+          <div class="w-24 h-3.5 rounded bg-content-tertiary/50 hover:bg-brand-link transition-colors cursor-pointer"></div>
+          <div class="w-32 h-3.5 rounded bg-content-tertiary/50 hover:bg-brand-link transition-colors cursor-pointer"></div>
+        </div>
+      </div>
+
+      <!-- Column 4: Navigation Category -->
+      <div class="flex flex-col gap-4">
+        <div class="w-20 h-4 rounded bg-content-primary"></div>
+        <div class="space-y-3">
+          <div class="w-28 h-3.5 rounded bg-content-tertiary/50 hover:bg-brand-link transition-colors cursor-pointer"></div>
+          <div class="w-20 h-3.5 rounded bg-content-tertiary/50 hover:bg-brand-link transition-colors cursor-pointer"></div>
+          <div class="w-24 h-3.5 rounded bg-content-tertiary/50 hover:bg-brand-link transition-colors cursor-pointer"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom Utility Bar -->
+    <div class="w-full pt-8 border-t border-border-hairline flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-mono text-content-tertiary">
+      <div class="w-64 h-3.5 rounded bg-content-tertiary/30"></div>
+      
+      <div class="flex items-center gap-6">
+        <div class="w-20 h-3.5 rounded bg-content-tertiary/30 hover:bg-brand-link cursor-pointer"></div>
+        <div class="w-24 h-3.5 rounded bg-content-tertiary/30 hover:bg-brand-link cursor-pointer"></div>
+        <div class="w-16 h-3.5 rounded bg-content-tertiary/30 hover:bg-brand-link cursor-pointer"></div>
+      </div>
+    </div>
+
+  </div>
+</footer>

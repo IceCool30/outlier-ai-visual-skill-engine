@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Outlier Visual Skill Engine | Presentation Layer</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fragment+Mono:ital@0;1&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        screens: {
+          'sm': '640px',
+          'tablet': '810px',
+          'md': '810px',
+          'lg': '1024px',
+          'desktop': '1280px',
+          'xl': '1280px'
+        },
+        extend: {
+          colors: {
+            brand: {
+              primary: '#F7803C',
+              hover: '#FF8D4D',
+              active: '#EF6000',
+              deep: '#BA561D',
+              link: '#CF6325',
+              tint: {
+                100: '#FFF9F7',
+                200: '#FEFBF5',
+                300: '#FDF4E7',
+                400: '#FCF3ED',
+                500: '#FFE2D7'
+              }
+            },
+            surface: {
+              canvas: '#FFFFFF',
+              light: {
+                50: '#FAFAFA',
+                100: '#F7F7F8',
+                200: '#F5F5F5',
+                300: '#F2F4F7',
+                400: '#EBECED'
+              },
+              dark: {
+                900: '#0F0F10',
+                850: '#131316',
+                800: '#1A1C1E',
+                700: '#222222',
+                600: '#2C2D30'
+              }
+            },
+            content: {
+              primary: '#000000',
+              secondary: '#111111',
+              tertiary: '#404245',
+              muted: '#777777',
+              subtle: '#80858F',
+              inverse: '#FFFFFF'
+            },
+            border: {
+              subtle: '#CFD1D5',
+              light: '#DDDDDD',
+              dark: '#2C2D30',
+              hairline: 'rgba(0, 0, 0, 0.08)'
+            },
+            domain: {
+              purple: { base: '#7A72F1', dark: '#312B83', light: '#B3AEF7', bg: '#F3F3FF', border: '#E5E6FF' },
+              lime: { base: '#DAFF85', dark: '#0A7A22', light: '#DFFF7B', bg: '#F9FFE7', border: '#D5F5A3' },
+              cyan: { base: '#6BD4EB', dark: '#1970C2', light: '#D4F1F8', bg: '#F4F9FF', border: '#C9DFFF' },
+              amber: { base: '#FABB00', dark: '#7C7000', light: '#FFE094', bg: '#FFF9EA', border: '#FCE5B2' },
+              rose: { base: '#F7C7C8', dark: '#A30F0F', light: '#FFE2D7', bg: '#FFF9F7', border: '#FFD9D9' }
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            mono: ['"Fragment Mono"', 'ui-monospace', 'monospace']
+          },
+          borderRadius: {
+            'pill': '120px',
+            'banner': '48px',
+            'sub-banner': '36px',
+            'container': '16px',
+            'card': '12px',
+            'control': '8px',
+            'badge': '6px'
+          },
+          boxShadow: {
+            'subtle': '0px 2px 4px 0px rgba(0, 0, 0, 0.05), 0px 1px 0px 0px rgba(0, 0, 0, 0.03)',
+            'card': '0px 2px 10px -3px rgba(153, 153, 153, 0.25)',
+            'floating': '0px 10px 30px -10px rgba(0, 0, 0, 0.08), 0px 4px 6px -2px rgba(0, 0, 0, 0.03)',
+            'glow-coral': '0px 0px 24px 0px rgba(247, 128, 60, 0.25)'
+          },
+          backgroundImage: {
+            'hero-fade': 'linear-gradient(180deg, #FBFBFB 0%, rgba(217, 217, 217, 0) 100%)',
+            'workbench-pearlescent': 'linear-gradient(270deg, #F0FCFF 0%, #FFFFFF 50%, #FCEBE1 105%)',
+            'card-subtle': 'linear-gradient(180deg, #FFFFFF 0%, #EEEEEE 100%)',
+            'timeline-glow': 'linear-gradient(270deg, #FFE2D7 0%, rgba(141, 228, 255, 0.36) 100%)',
+            'cta-horizon': 'linear-gradient(90deg, rgba(199, 243, 255, 0.38) 25%, #F7C7C8 100%)',
+            'stat-cobalt': 'linear-gradient(225deg, rgba(25, 112, 194, 0.1) 0%, #1970C2 100%)',
+            'stat-crimson': 'linear-gradient(202deg, rgba(163, 15, 15, 0.1) 0%, #A30F0F 100%)',
+            'stat-emerald': 'linear-gradient(202deg, rgba(17, 143, 44, 0.1) 0%, #0A7A22 94%)',
+            'stat-graphite': 'linear-gradient(202deg, rgba(34, 34, 34, 0.1) 0%, #222222 94%)',
+            'footer-fade': 'linear-gradient(180deg, #FFFFFF 31%, #EEEEEE 100%)'
+          },
+          animation: {
+            'marquee': 'marquee 35s linear infinite'
+          },
+          keyframes: {
+            marquee: {
+              '0%': { transform: 'translateX(0%)' },
+              '100%': { transform: 'translateX(-50%)' }
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="./styles/tokens.css">
+</head>
+<body class="bg-surface-canvas text-content-primary font-sans antialiased selection:bg-brand-primary selection:text-white">
+
+  <!-- ========================================================================
+       1. FLOATING NAVIGATION BAR
+       ======================================================================== -->
+  <header class="w-full h-[79px] sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-border-hairline transition-all duration-200">
+    <div class="max-w-[1280px] mx-auto h-full px-6 md:px-10 flex items-center justify-between">
+      
+      <!-- Brand Logo / Mark -->
+      <div class="flex items-center gap-3 cursor-pointer">
+        <div class="w-9 h-9 rounded-lg bg-content-primary flex items-center justify-center">
+          <div class="w-4 h-4 rounded-full bg-brand-primary"></div>
+        </div>
+        <div class="h-5 w-24 rounded bg-surface-light-400"></div>
+      </div>
+
+      <!-- Links List -->
+      <nav class="hidden md:flex items-center gap-8">
+        <div class="h-4 w-16 rounded bg-surface-light-400 hover:bg-content-secondary transition-colors cursor-pointer"></div>
+        <div class="h-4 w-20 rounded bg-surface-light-400 hover:bg-content-secondary transition-colors cursor-pointer"></div>
+        <div class="h-4 w-12 rounded bg-surface-light-400 hover:bg-content-secondary transition-colors cursor-pointer"></div>
+        <div class="h-4 w-16 rounded bg-surface-light-400 hover:bg-content-secondary transition-colors cursor-pointer"></div>
+      </nav>
+
+      <!-- Utility & Primary Pill Action -->
+      <div class="flex items-center gap-4">
+        <div class="hidden sm:block h-4 w-12 rounded bg-surface-light-400 cursor-pointer"></div>
+        <a href="#action" class="inline-flex items-center justify-center h-10 px-6 rounded-pill bg-brand-primary text-content-primary font-semibold text-sm transition-all duration-200 hover:bg-brand-hover hover:scale-[1.02] active:bg-brand-active shadow-subtle">
+          <span class="w-24 h-3.5 rounded bg-content-primary/25"></span>
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       2. HERO PRESENTATION SECTION
+       ======================================================================== -->
+  <section class="w-full relative overflow-hidden bg-hero-fade pt-12 pb-16 md:py-20 flex flex-col items-center">
+    <div class="absolute -top-32 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-brand-primary/10 rounded-full blur-[100px] pointer-events-none" aria-hidden="true"></div>
+
+    <div class="max-w-[1280px] w-full mx-auto px-6 md:px-10 flex flex-col items-center text-center relative z-10">
+      
+      <!-- Overline Tag -->
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-tint-300 border border-brand-deep/20 mb-6">
+        <span class="w-2 h-2 rounded-full bg-brand-deep animate-pulse"></span>
+        <div class="h-3.5 w-36 rounded bg-brand-deep/30"></div>
+      </div>
+
+      <!-- Display Title (H1) -->
+      <h1 class="max-w-[840px] text-4xl tablet:text-5xl desktop:text-[54px] font-semibold text-content-primary tracking-[-1.5px] leading-[1.2] mb-6 flex flex-col items-center gap-3">
+        <span class="w-full max-w-[760px] h-12 md:h-14 rounded-md bg-surface-light-400"></span>
+        <span class="w-3/4 max-w-[540px] h-12 md:h-14 rounded-md bg-surface-light-400"></span>
+      </h1>
+
+      <!-- Subtitle -->
+      <p class="max-w-[640px] text-base md:text-xl text-content-tertiary leading-[1.5] mb-10 flex flex-col items-center gap-2">
+        <span class="w-full max-w-[580px] h-5 rounded bg-surface-light-300"></span>
+        <span class="w-4/5 max-w-[460px] h-5 rounded bg-surface-light-300"></span>
+      </p>
+
+      <!-- Primary Action CTA -->
+      <div class="flex flex-col sm:flex-row items-center gap-4 mb-14">
+        <a href="#action" class="inline-flex items-center justify-center px-10 py-5 rounded-pill bg-brand-primary text-content-primary font-semibold text-lg transition-all duration-200 hover:bg-brand-hover hover:scale-[1.02] active:bg-brand-active shadow-glow-coral">
+          <span class="w-36 h-4 rounded bg-content-primary/30"></span>
+        </a>
+      </div>
+
+    </div>
+
+    <!-- ========================================================================
+         3. DUAL-CARD HORIZONTAL MARQUEE TICKER
+         ======================================================================== -->
+    <div class="w-full overflow-hidden py-4 select-none relative" aria-hidden="true">
+      <div class="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-surface-canvas to-transparent z-10 pointer-events-none"></div>
+      <div class="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-surface-canvas to-transparent z-10 pointer-events-none"></div>
+
+      <div class="flex gap-5 w-max animate-marquee hover:[animation-play-state:paused]">
+        
+        <!-- Sequence Item 1: Profile Card -->
+        <div class="w-[209px] h-[400px] flex flex-col justify-end">
+          <div class="w-[209px] h-[296px] rounded-card bg-surface-light-300 relative overflow-hidden flex flex-col justify-end p-4 border border-border-hairline shadow-subtle">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#163F57]/90 via-[#163F57]/30 to-transparent"></div>
+            <div class="relative z-10 flex flex-col gap-1.5">
+              <div class="h-4 w-20 rounded bg-white/80"></div>
+              <div class="h-3 w-28 rounded bg-white/50"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sequence Item 2: Stat Card Cobalt + Profile Mini Stack -->
+        <div class="w-[209px] h-[400px] flex flex-col justify-between">
+          <div class="w-[209px] h-[127px] rounded-card bg-stat-cobalt p-4 flex flex-col justify-between border border-white/10 shadow-card">
+            <div class="h-7 w-24 rounded bg-white/90"></div>
+            <div class="h-4 w-32 rounded bg-white/70"></div>
+          </div>
+          <div class="w-[209px] h-[250px] rounded-card bg-surface-light-300 relative overflow-hidden flex flex-col justify-end p-4 border border-border-hairline">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#80137C]/90 via-[#80137C]/30 to-transparent"></div>
+            <div class="relative z-10 flex flex-col gap-1.5">
+              <div class="h-4 w-24 rounded bg-white/80"></div>
+              <div class="h-3 w-32 rounded bg-white/50"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sequence Item 3: Profile Card -->
+        <div class="w-[209px] h-[400px] flex flex-col justify-end">
+          <div class="w-[209px] h-[296px] rounded-card bg-surface-light-300 relative overflow-hidden flex flex-col justify-end p-4 border border-border-hairline shadow-subtle">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#0B7525]/90 via-[#0B7525]/30 to-transparent"></div>
+            <div class="relative z-10 flex flex-col gap-1.5">
+              <div class="h-4 w-20 rounded bg-white/80"></div>
+              <div class="h-3 w-28 rounded bg-white/50"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sequence Item 4: Stat Card Crimson + Profile Mini Stack -->
+        <div class="w-[209px] h-[400px] flex flex-col justify-between">
+          <div class="w-[209px] h-[250px] rounded-card bg-surface-light-300 relative overflow-hidden flex flex-col justify-end p-4 border border-border-hairline">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#7B8F0B]/90 via-[#7B8F0B]/30 to-transparent"></div>
+            <div class="relative z-10 flex flex-col gap-1.5">
+              <div class="h-4 w-24 rounded bg-white/80"></div>
+              <div class="h-3 w-32 rounded bg-white/50"></div>
+            </div>
+          </div>
+          <div class="w-[209px] h-[127px] rounded-card bg-stat-crimson p-4 flex flex-col justify-between border border-white/10 shadow-card">
+            <div class="h-7 w-20 rounded bg-white/90"></div>
+            <div class="h-4 w-36 rounded bg-white/70"></div>
+          </div>
+        </div>
+
+        <!-- Sequence Item 5: Stat Card Emerald -->
+        <div class="w-[209px] h-[400px] flex flex-col justify-between">
+          <div class="w-[209px] h-[250px] rounded-card bg-surface-light-300 relative overflow-hidden flex flex-col justify-end p-4 border border-border-hairline">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#444444]/90 via-[#444444]/30 to-transparent"></div>
+            <div class="relative z-10 flex flex-col gap-1.5">
+              <div class="h-4 w-20 rounded bg-white/80"></div>
+              <div class="h-3 w-28 rounded bg-white/50"></div>
+            </div>
+          </div>
+          <div class="w-[209px] h-[127px] rounded-card bg-stat-emerald p-4 flex flex-col justify-between border border-white/10 shadow-card">
+            <div class="h-7 w-20 rounded bg-white/90"></div>
+            <div class="h-4 w-36 rounded bg-white/70"></div>
+          </div>
+        </div>
+
+        <!-- Duplicated items for continuous loop -->
+        <div class="w-[209px] h-[400px] flex flex-col justify-end">
+          <div class="w-[209px] h-[296px] rounded-card bg-surface-light-300 relative overflow-hidden flex flex-col justify-end p-4 border border-border-hairline shadow-subtle">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#163F57]/90 via-[#163F57]/30 to-transparent"></div>
+            <div class="relative z-10 flex flex-col gap-1.5">
+              <div class="h-4 w-20 rounded bg-white/80"></div>
+              <div class="h-3 w-28 rounded bg-white/50"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="w-[209px] h-[400px] flex flex-col justify-between">
+          <div class="w-[209px] h-[127px] rounded-card bg-stat-cobalt p-4 flex flex-col justify-between border border-white/10 shadow-card">
+            <div class="h-7 w-24 rounded bg-white/90"></div>
+            <div class="h-4 w-32 rounded bg-white/70"></div>
+          </div>
+          <div class="w-[209px] h-[250px] rounded-card bg-surface-light-300 relative overflow-hidden flex flex-col justify-end p-4 border border-border-hairline">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#80137C]/90 via-[#80137C]/30 to-transparent"></div>
+            <div class="relative z-10 flex flex-col gap-1.5">
+              <div class="h-4 w-24 rounded bg-white/80"></div>
+              <div class="h-3 w-32 rounded bg-white/50"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ========================================================================
+       4. INTERACTIVE WORKBENCH & TABBED STAGE
+       ======================================================================== -->
+  <section class="w-full py-20 md:py-28 px-6 md:px-14 flex flex-col items-center bg-surface-canvas">
+    <div class="max-w-[1280px] w-full mx-auto flex flex-col items-center gap-12">
+      
+      <!-- Section Header -->
+      <div class="flex flex-col items-center text-center max-w-[780px] gap-4">
+        <span class="text-xs md:text-sm font-semibold tracking-[2px] uppercase text-brand-deep">
+          <span class="inline-block w-48 h-3.5 rounded bg-brand-deep/30"></span>
+        </span>
+        <h2 class="text-3xl tablet:text-4xl desktop:text-[40px] font-semibold text-content-primary tracking-[-1px] leading-[1.3] flex flex-col items-center gap-2">
+          <span class="w-full max-w-[620px] h-10 md:h-12 rounded-md bg-surface-light-400"></span>
+        </h2>
+        <p class="text-sm md:text-base text-content-tertiary max-w-[600px] flex flex-col items-center gap-2">
+          <span class="w-full max-w-[520px] h-4 rounded bg-surface-light-300"></span>
+        </p>
+      </div>
+
+      <!-- Segmented Pill Tab Bar -->
+      <div class="w-full max-w-[1160px] h-20 md:h-24 p-3 md:p-4 rounded-pill bg-surface-light-200 flex items-center gap-2 border border-border-hairline shadow-inner" id="tab-controller">
+        <button onclick="switchTab(0)" class="tab-btn flex-1 h-full rounded-pill bg-white shadow-subtle flex items-center justify-center px-4 transition-all duration-200" data-tab="0">
+          <div class="w-40 h-4 rounded bg-content-primary"></div>
+        </button>
+        <button onclick="switchTab(1)" class="tab-btn flex-1 h-full rounded-pill bg-transparent hover:bg-white/50 flex items-center justify-center px-4 transition-all duration-200" data-tab="1">
+          <div class="w-36 h-4 rounded bg-content-muted"></div>
+        </button>
+        <button onclick="switchTab(2)" class="tab-btn flex-1 h-full rounded-pill bg-transparent hover:bg-white/50 flex items-center justify-center px-4 transition-all duration-200" data-tab="2">
+          <div class="w-36 h-4 rounded bg-content-muted"></div>
+        </button>
+      </div>
+
+      <!-- Pearlescent Interactive Stage Surface -->
+      <div class="w-full max-w-[1160px] rounded-banner bg-workbench-pearlescent p-8 md:p-14 border border-border-subtle/40 shadow-card flex flex-col lg:flex-row items-center gap-10 lg:gap-14">
+        
+        <!-- Left: Metadata Descriptions -->
+        <div class="flex-1 flex flex-col gap-8 w-full">
+          <div class="flex flex-col gap-3">
+            <div class="w-64 h-8 rounded-md bg-content-primary"></div>
+            <div class="w-full max-w-md h-4 rounded bg-content-tertiary/40"></div>
+          </div>
+
+          <div class="space-y-6">
+            <div class="p-5 rounded-container bg-white/70 backdrop-blur-sm border border-white/60 shadow-subtle">
+              <div class="w-16 h-4 rounded bg-brand-deep/80 mb-2 font-mono text-xs"></div>
+              <div class="space-y-2">
+                <div class="w-full h-3 rounded bg-content-tertiary/30"></div>
+                <div class="w-4/5 h-3 rounded bg-content-tertiary/30"></div>
+              </div>
+            </div>
+
+            <div class="p-5 rounded-container bg-white/70 backdrop-blur-sm border border-white/60 shadow-subtle">
+              <div class="w-16 h-4 rounded bg-brand-deep/80 mb-2 font-mono text-xs"></div>
+              <div class="space-y-2">
+                <div class="w-full h-3 rounded bg-content-tertiary/30"></div>
+                <div class="w-3/4 h-3 rounded bg-content-tertiary/30"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Code Workbench Simulator -->
+        <div class="flex-1 w-full">
+          <div class="w-full rounded-container bg-white border border-border-hairline shadow-floating p-6 md:p-8 flex flex-col gap-6">
+            <div class="flex items-center justify-between pb-4 border-b border-border-hairline">
+              <div class="flex items-center gap-2">
+                <div class="w-3 h-3 rounded-full bg-[#FF5F56]"></div>
+                <div class="w-3 h-3 rounded-full bg-[#FFBD2E]"></div>
+                <div class="w-3 h-3 rounded-full bg-[#27C93F]"></div>
+              </div>
+              <div class="w-24 h-4 rounded-badge bg-surface-light-300"></div>
+            </div>
+
+            <div class="rounded-control bg-surface-light-100 p-4 font-mono text-sm border border-border-hairline space-y-2">
+              <div class="w-3/4 h-3.5 rounded bg-content-tertiary/50"></div>
+              <div class="w-full h-3.5 rounded bg-content-tertiary/30"></div>
+              <div class="w-2/3 h-3.5 rounded bg-content-tertiary/40"></div>
+            </div>
+
+            <div class="space-y-3">
+              <div class="flex items-center justify-between p-3 rounded-control bg-surface-light-50 border border-border-hairline">
+                <div class="flex items-center gap-3">
+                  <div class="w-4 h-4 rounded bg-domain-lime-base"></div>
+                  <div class="w-36 h-3 rounded bg-content-tertiary/40"></div>
+                </div>
+                <div class="w-12 h-4 rounded-badge bg-domain-lime-bg"></div>
+              </div>
+
+              <div class="flex items-center justify-between p-3 rounded-control bg-surface-light-50 border border-border-hairline">
+                <div class="flex items-center gap-3">
+                  <div class="w-4 h-4 rounded bg-domain-purple-base"></div>
+                  <div class="w-44 h-3 rounded bg-content-tertiary/40"></div>
+                </div>
+                <div class="w-12 h-4 rounded-badge bg-domain-purple-bg"></div>
+              </div>
+            </div>
+
+            <div class="flex justify-end pt-2">
+              <div class="h-9 px-6 rounded-pill bg-brand-primary flex items-center justify-center">
+                <div class="w-20 h-3 rounded bg-content-primary/30"></div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       5. 2x2 ASYMMETRIC FEATURE GRID
+       ======================================================================== -->
+  <section class="w-full py-20 md:py-28 px-6 md:px-14 flex flex-col items-center bg-white">
+    <div class="max-w-[1280px] w-full mx-auto flex flex-col items-center gap-12">
+      
+      <!-- Section Header -->
+      <div class="flex flex-col items-center text-center max-w-[800px] gap-4">
+        <span class="text-xs md:text-sm font-semibold tracking-[2px] uppercase text-brand-deep">
+          <span class="inline-block w-40 h-3.5 rounded bg-brand-deep/30"></span>
+        </span>
+        <h2 class="text-3xl tablet:text-4xl desktop:text-[40px] font-semibold text-content-primary tracking-[-1px] leading-[1.3] flex flex-col items-center gap-2">
+          <span class="w-full max-w-[640px] h-10 md:h-12 rounded-md bg-surface-light-400"></span>
+          <span class="w-3/4 max-w-[480px] h-10 md:h-12 rounded-md bg-surface-light-400"></span>
+        </h2>
+        <p class="text-sm md:text-base text-content-tertiary max-w-[640px] flex flex-col items-center gap-2">
+          <span class="w-full max-w-[560px] h-4 rounded bg-surface-light-300"></span>
+        </p>
+      </div>
+
+      <!-- 2x2 Grid -->
+      <div class="w-full max-w-[1160px] grid grid-cols-1 md:grid-cols-2 gap-6">
+        
+        <div class="w-full h-[420px] rounded-card bg-card-subtle p-8 md:p-10 border border-border-hairline shadow-subtle flex flex-col justify-between hover:scale-[1.01] transition-transform duration-200">
+          <div class="w-full h-[220px] rounded-control bg-surface-light-100/60 flex items-center justify-center relative overflow-hidden">
+            <div class="w-24 h-24 rounded-full bg-brand-primary/10 flex items-center justify-center">
+              <div class="w-12 h-12 rounded-full bg-brand-primary/20"></div>
+            </div>
+          </div>
+          <div class="flex flex-col gap-2">
+            <div class="w-4/5 h-6 rounded bg-content-primary"></div>
+            <div class="w-3/5 h-6 rounded bg-content-primary"></div>
+          </div>
+        </div>
+
+        <div class="w-full h-[420px] rounded-card bg-card-subtle p-8 md:p-10 border border-border-hairline shadow-subtle flex flex-col justify-between hover:scale-[1.01] transition-transform duration-200">
+          <div class="w-full h-[220px] rounded-control bg-surface-light-100/60 flex items-center justify-center relative overflow-hidden">
+            <div class="w-32 h-16 rounded-pill bg-domain-lime-light/30 flex items-center justify-center">
+              <div class="w-20 h-4 rounded bg-domain-lime-dark/30"></div>
+            </div>
+          </div>
+          <div class="flex flex-col gap-2">
+            <div class="w-full h-6 rounded bg-content-primary"></div>
+            <div class="w-1/2 h-6 rounded bg-content-primary"></div>
+          </div>
+        </div>
+
+        <div class="w-full h-[420px] rounded-card bg-card-subtle p-8 md:p-10 border border-border-hairline shadow-subtle flex flex-col justify-between hover:scale-[1.01] transition-transform duration-200">
+          <div class="w-full h-[220px] rounded-control bg-surface-light-100/60 flex items-center justify-center relative overflow-hidden">
+            <div class="flex gap-3">
+              <div class="w-14 h-14 rounded-container bg-domain-purple-light/40"></div>
+              <div class="w-14 h-14 rounded-container bg-domain-cyan-light/40"></div>
+            </div>
+          </div>
+          <div class="flex flex-col gap-2">
+            <div class="w-5/6 h-6 rounded bg-content-primary"></div>
+            <div class="w-2/3 h-6 rounded bg-content-primary"></div>
+          </div>
+        </div>
+
+        <div class="w-full h-[420px] rounded-card bg-card-subtle p-8 md:p-10 border border-border-hairline shadow-subtle flex flex-col justify-between hover:scale-[1.01] transition-transform duration-200">
+          <div class="w-full h-[220px] rounded-control bg-surface-light-100/60 flex items-center justify-center relative overflow-hidden">
+            <div class="w-28 h-28 rounded-card bg-domain-amber-light/30 flex items-center justify-center">
+              <div class="w-16 h-16 rounded-full bg-domain-amber-base/20"></div>
+            </div>
+          </div>
+          <div class="flex flex-col gap-2">
+            <div class="w-4/5 h-6 rounded bg-content-primary"></div>
+            <div class="w-3/5 h-6 rounded bg-content-primary"></div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       6. TESTIMONIALS SLIDING CAROUSEL
+       ======================================================================== -->
+  <section class="w-full py-20 md:py-28 px-6 md:px-14 flex flex-col items-center bg-surface-light-50">
+    <div class="max-w-[1280px] w-full mx-auto flex flex-col items-center gap-12">
+      
+      <!-- Section Header -->
+      <div class="flex flex-col items-center text-center max-w-[800px] gap-4">
+        <span class="text-xs md:text-sm font-semibold tracking-[2px] uppercase text-brand-deep">
+          <span class="inline-block w-32 h-3.5 rounded bg-brand-deep/30"></span>
+        </span>
+        <h2 class="text-3xl tablet:text-4xl desktop:text-[40px] font-semibold text-content-primary tracking-[-1px] leading-[1.3] flex flex-col items-center gap-2">
+          <span class="w-full max-w-[620px] h-10 md:h-12 rounded-md bg-surface-light-400"></span>
+        </h2>
+      </div>
+
+      <!-- Track -->
+      <div class="w-full max-w-[1160px] relative overflow-hidden">
+        <div class="flex gap-6 overflow-x-auto pb-4 scrollbar-none snap-x snap-mandatory">
+          
+          <div class="min-w-[320px] md:min-w-[340px] h-[604px] rounded-card bg-white border border-border-hairline shadow-subtle p-5 flex flex-col justify-between snap-start">
+            <div class="w-full h-[360px] rounded-card bg-surface-light-200 relative overflow-hidden flex items-center justify-center">
+              <div class="w-14 h-14 rounded-full bg-white/90 shadow-floating flex items-center justify-center">
+                <div class="w-0 h-0 border-y-8 border-y-transparent border-l-[12px] border-l-content-primary ml-1"></div>
+              </div>
+            </div>
+            <div class="space-y-3 pt-2">
+              <div class="space-y-2">
+                <div class="w-full h-3 rounded bg-content-primary/80"></div>
+                <div class="w-full h-3 rounded bg-content-primary/80"></div>
+                <div class="w-3/4 h-3 rounded bg-content-primary/80"></div>
+              </div>
+              <div class="pt-3 border-t border-border-hairline flex flex-col gap-1">
+                <div class="w-24 h-4 rounded bg-content-primary"></div>
+                <div class="w-36 h-3 rounded bg-content-tertiary/40"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="min-w-[320px] md:min-w-[340px] h-[604px] rounded-card bg-white border border-border-hairline shadow-subtle p-5 flex flex-col justify-between snap-start">
+            <div class="w-full h-[360px] rounded-card bg-surface-light-200 relative overflow-hidden flex items-center justify-center">
+              <div class="w-14 h-14 rounded-full bg-white/90 shadow-floating flex items-center justify-center">
+                <div class="w-0 h-0 border-y-8 border-y-transparent border-l-[12px] border-l-content-primary ml-1"></div>
+              </div>
+            </div>
+            <div class="space-y-3 pt-2">
+              <div class="space-y-2">
+                <div class="w-full h-3 rounded bg-content-primary/80"></div>
+                <div class="w-full h-3 rounded bg-content-primary/80"></div>
+                <div class="w-2/3 h-3 rounded bg-content-primary/80"></div>
+              </div>
+              <div class="pt-3 border-t border-border-hairline flex flex-col gap-1">
+                <div class="w-28 h-4 rounded bg-content-primary"></div>
+                <div class="w-32 h-3 rounded bg-content-tertiary/40"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="min-w-[320px] md:min-w-[340px] h-[604px] rounded-card bg-white border border-border-hairline shadow-subtle p-5 flex flex-col justify-between snap-start">
+            <div class="w-full h-[360px] rounded-card bg-surface-light-200 relative overflow-hidden flex items-center justify-center">
+              <div class="w-14 h-14 rounded-full bg-white/90 shadow-floating flex items-center justify-center">
+                <div class="w-0 h-0 border-y-8 border-y-transparent border-l-[12px] border-l-content-primary ml-1"></div>
+              </div>
+            </div>
+            <div class="space-y-3 pt-2">
+              <div class="space-y-2">
+                <div class="w-full h-3 rounded bg-content-primary/80"></div>
+                <div class="w-full h-3 rounded bg-content-primary/80"></div>
+                <div class="w-4/5 h-3 rounded bg-content-primary/80"></div>
+              </div>
+              <div class="pt-3 border-t border-border-hairline flex flex-col gap-1">
+                <div class="w-24 h-4 rounded bg-content-primary"></div>
+                <div class="w-40 h-3 rounded bg-content-tertiary/40"></div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="flex items-center justify-center gap-4 mt-8">
+          <button class="w-[54px] h-[54px] rounded-full bg-border-light hover:bg-surface-light-400 flex items-center justify-center transition-colors shadow-subtle" aria-label="Previous">
+            <svg class="w-5 h-5 text-content-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+            </svg>
+          </button>
+          <button class="w-[54px] h-[54px] rounded-full bg-border-light hover:bg-surface-light-400 flex items-center justify-center transition-colors shadow-subtle" aria-label="Next">
+            <svg class="w-5 h-5 text-content-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       7. 4-STEP PROGRESSIVE ONBOARDING TIMELINE
+       ======================================================================== -->
+  <section class="w-full py-20 md:py-28 px-6 md:px-14 flex flex-col items-center bg-white">
+    <div class="max-w-[1280px] w-full mx-auto flex flex-col items-center gap-12">
+      
+      <div class="flex flex-col items-center text-center max-w-[800px] gap-4">
+        <span class="text-xs md:text-sm font-semibold tracking-[2px] uppercase text-brand-deep">
+          <span class="inline-block w-36 h-3.5 rounded bg-brand-deep/30"></span>
+        </span>
+        <h2 class="text-3xl tablet:text-4xl desktop:text-[40px] font-semibold text-content-primary tracking-[-1px] leading-[1.3] flex flex-col items-center gap-2">
+          <span class="w-full max-w-[560px] h-10 md:h-12 rounded-md bg-surface-light-400"></span>
+        </h2>
+      </div>
+
+      <div class="w-full max-w-[1160px] flex flex-col lg:flex-row items-center gap-10 lg:gap-12">
+        
+        <!-- Left: Steps -->
+        <div class="flex-1 w-full space-y-4">
+          <div class="p-6 rounded-card bg-surface-light-100 border-l-4 border-brand-primary shadow-subtle flex items-start gap-5">
+            <span class="font-mono text-2xl font-bold text-brand-deep">01</span>
+            <div class="flex-1 space-y-2">
+              <div class="w-44 h-5 rounded bg-content-primary"></div>
+              <div class="w-full max-w-sm h-3.5 rounded bg-content-tertiary/40"></div>
+            </div>
+          </div>
+
+          <div class="p-6 rounded-card bg-white border border-border-hairline flex items-start gap-5 hover:bg-surface-light-50 transition-colors cursor-pointer">
+            <span class="font-mono text-2xl font-bold text-content-muted">02</span>
+            <div class="flex-1 space-y-2">
+              <div class="w-48 h-5 rounded bg-content-secondary"></div>
+              <div class="w-3/4 h-3.5 rounded bg-content-tertiary/20"></div>
+            </div>
+          </div>
+
+          <div class="p-6 rounded-card bg-white border border-border-hairline flex items-start gap-5 hover:bg-surface-light-50 transition-colors cursor-pointer">
+            <span class="font-mono text-2xl font-bold text-content-muted">03</span>
+            <div class="flex-1 space-y-2">
+              <div class="w-40 h-5 rounded bg-content-secondary"></div>
+              <div class="w-2/3 h-3.5 rounded bg-content-tertiary/20"></div>
+            </div>
+          </div>
+
+          <div class="p-6 rounded-card bg-white border border-border-hairline flex items-start gap-5 hover:bg-surface-light-50 transition-colors cursor-pointer">
+            <span class="font-mono text-2xl font-bold text-content-muted">04</span>
+            <div class="flex-1 space-y-2">
+              <div class="w-52 h-5 rounded bg-content-secondary"></div>
+              <div class="w-3/4 h-3.5 rounded bg-content-tertiary/20"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Glow Preview -->
+        <div class="flex-1 w-full flex justify-center">
+          <div class="w-full max-w-[564px] h-[451px] rounded-container bg-timeline-glow p-2 border border-border-subtle/30 shadow-card flex items-center justify-center">
+            <div class="w-full h-full rounded-card bg-white p-6 flex flex-col justify-between shadow-subtle border border-white/80">
+              <div class="flex items-center justify-between pb-4 border-b border-border-hairline">
+                <div class="w-32 h-4 rounded bg-content-primary"></div>
+                <div class="w-16 h-4 rounded-badge bg-domain-lime-bg"></div>
+              </div>
+
+              <div class="space-y-4 my-auto">
+                <div class="space-y-1.5">
+                  <div class="w-20 h-3 rounded bg-content-tertiary/40"></div>
+                  <div class="w-full h-10 rounded-control bg-surface-light-100 border border-border-hairline"></div>
+                </div>
+                <div class="space-y-1.5">
+                  <div class="w-24 h-3 rounded bg-content-tertiary/40"></div>
+                  <div class="w-full h-10 rounded-control bg-surface-light-100 border border-border-hairline"></div>
+                </div>
+                <div class="flex flex-wrap gap-2 pt-2">
+                  <div class="w-16 h-6 rounded-pill bg-domain-purple-bg"></div>
+                  <div class="w-20 h-6 rounded-pill bg-domain-cyan-bg"></div>
+                  <div class="w-24 h-6 rounded-pill bg-domain-amber-bg"></div>
+                </div>
+              </div>
+
+              <div class="pt-4 border-t border-border-hairline flex items-center justify-between">
+                <div class="w-24 h-3 rounded bg-content-tertiary/30"></div>
+                <div class="h-8 px-5 rounded-pill bg-brand-primary flex items-center justify-center">
+                  <div class="w-12 h-2.5 rounded bg-content-primary/30"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       8. FAQ ACCORDION
+       ======================================================================== -->
+  <section class="w-full py-20 md:py-28 px-6 md:px-14 flex flex-col items-center bg-surface-canvas">
+    <div class="max-w-[1280px] w-full mx-auto flex flex-col items-center gap-12">
+      
+      <div class="flex flex-col items-center text-center max-w-[800px] gap-4">
+        <span class="text-xs md:text-sm font-semibold tracking-[2px] uppercase text-brand-deep">
+          <span class="inline-block w-44 h-3.5 rounded bg-brand-deep/30"></span>
+        </span>
+        <h2 class="text-3xl tablet:text-4xl desktop:text-[40px] font-semibold text-content-primary tracking-[-1px] leading-[1.3] flex flex-col items-center gap-2">
+          <span class="w-full max-w-[480px] h-10 md:h-12 rounded-md bg-surface-light-400"></span>
+        </h2>
+      </div>
+
+      <div class="w-full max-w-[1040px] mx-auto flex flex-col" id="accordion-root">
+        
+        <!-- FAQ 1 (Open) -->
+        <div class="accordion-item w-full border-b border-border-light/80 py-7 flex flex-col gap-4">
+          <div onclick="toggleAccordion(this)" class="w-full flex items-center justify-between cursor-pointer group">
+            <div class="w-2/3 h-5 rounded bg-content-primary group-hover:bg-brand-deep transition-colors"></div>
+            <svg class="chevron w-4 h-2.5 text-content-primary rotate-180 transition-transform duration-200" viewBox="0 0 14 9" fill="none" stroke="currentColor">
+              <path d="M1 8L7 2L13 8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="accordion-body space-y-2 pt-2 text-content-secondary leading-[1.8]">
+            <div class="w-full h-4 rounded bg-content-tertiary/30"></div>
+            <div class="w-full h-4 rounded bg-content-tertiary/30"></div>
+            <div class="w-4/5 h-4 rounded bg-content-tertiary/30"></div>
+          </div>
+        </div>
+
+        <!-- FAQ 2 -->
+        <div class="accordion-item w-full border-b border-border-light/80 py-7 flex flex-col gap-4">
+          <div onclick="toggleAccordion(this)" class="w-full flex items-center justify-between cursor-pointer group">
+            <div class="w-3/4 h-5 rounded bg-content-primary group-hover:bg-brand-deep transition-colors"></div>
+            <svg class="chevron w-4 h-2.5 text-content-primary transition-transform duration-200" viewBox="0 0 14 9" fill="none" stroke="currentColor">
+              <path d="M1 1L7 7L13 1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="accordion-body hidden space-y-2 pt-2 text-content-secondary leading-[1.8]">
+            <div class="w-full h-4 rounded bg-content-tertiary/30"></div>
+            <div class="w-3/4 h-4 rounded bg-content-tertiary/30"></div>
+          </div>
+        </div>
+
+        <!-- FAQ 3 -->
+        <div class="accordion-item w-full border-b border-border-light/80 py-7 flex flex-col gap-4">
+          <div onclick="toggleAccordion(this)" class="w-full flex items-center justify-between cursor-pointer group">
+            <div class="w-1/2 h-5 rounded bg-content-primary group-hover:bg-brand-deep transition-colors"></div>
+            <svg class="chevron w-4 h-2.5 text-content-primary transition-transform duration-200" viewBox="0 0 14 9" fill="none" stroke="currentColor">
+              <path d="M1 1L7 7L13 1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="accordion-body hidden space-y-2 pt-2 text-content-secondary leading-[1.8]">
+            <div class="w-full h-4 rounded bg-content-tertiary/30"></div>
+            <div class="w-4/5 h-4 rounded bg-content-tertiary/30"></div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       9. HORIZON GLOW BOTTOM CTA BANNER
+       ======================================================================== -->
+  <section class="w-full py-20 md:py-28 px-6 md:px-14 flex flex-col items-center bg-white" id="action">
+    <div class="w-full max-w-[1160px] rounded-sub-banner bg-cta-horizon p-10 md:p-20 flex flex-col items-center text-center justify-center gap-10 border border-white/60 shadow-floating relative overflow-hidden">
+      <div class="absolute -top-20 -left-20 w-64 h-64 rounded-full bg-white/40 blur-2xl pointer-events-none" aria-hidden="true"></div>
+
+      <h2 class="text-3xl tablet:text-4xl desktop:text-[40px] font-semibold text-content-primary tracking-[-1px] leading-[1.3] max-w-[700px] flex flex-col items-center gap-2 relative z-10">
+        <span class="w-full max-w-[560px] h-10 md:h-12 rounded-md bg-content-primary"></span>
+      </h2>
+
+      <a href="#" class="inline-flex items-center justify-center px-10 py-5 rounded-pill bg-content-primary text-white font-semibold text-lg transition-all duration-200 hover:bg-content-secondary hover:scale-[1.02] active:scale-[0.98] shadow-floating relative z-10">
+        <span class="w-32 h-4 rounded bg-white/40"></span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       10. MULTI-COLUMN SUBSTRATE FOOTER
+       ======================================================================== -->
+  <footer class="w-full bg-footer-fade border-t border-border-hairline pt-20 pb-12 px-6 md:px-14 flex flex-col items-center">
+    <div class="max-w-[1280px] w-full mx-auto flex flex-col gap-16">
+      
+      <div class="w-full grid grid-cols-1 md:grid-cols-5 gap-12">
+        <div class="md:col-span-2 flex flex-col gap-6">
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-lg bg-content-primary flex items-center justify-center">
+              <div class="w-3.5 h-3.5 rounded-full bg-brand-primary"></div>
+            </div>
+            <div class="h-5 w-24 rounded bg-surface-light-400"></div>
+          </div>
+          <div class="space-y-2">
+            <div class="w-48 h-3.5 rounded bg-content-tertiary/40"></div>
+            <div class="w-64 h-3.5 rounded bg-content-tertiary/30"></div>
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-4">
+          <div class="w-20 h-4 rounded bg-content-primary"></div>
+          <div class="space-y-3">
+            <div class="w-24 h-3.5 rounded bg-content-tertiary/50 hover:bg-brand-link transition-colors cursor-pointer"></div>
+            <div class="w-28 h-3.5 rounded bg-content-tertiary/50 hover:bg-brand-link transition-colors cursor-pointer"></div>
+            <div class="w-20 h-3.5 rounded bg-content-tertiary/50 hover:bg-brand-link transition-colors cursor-pointer"></div>
+            <div class="w-24 h-3.5 rounded bg-content-tertiary/50 hover:bg-brand-link transition-colors cursor-pointer"></div>
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-4">
+          <div class="w-24 h-4 rounded bg-content-primary"></div>
+          <div class="space-y-3">
+            <div class="w-32 h-3.5 rounded bg-content-tertiary/50 hover:bg-brand-link transition-colors cursor-pointer"></div>
+            <div class="w-28 h-3.5 rounded bg-content-tertiary/50 hover:bg-brand-link transition-colors cursor-pointer"></div>
+            <div class="w-24 h-3.5 rounded bg-content-tertiary/50 hover:bg-brand-link transition-colors cursor-pointer"></div>
+            <div class="w-32 h-3.5 rounded bg-content-tertiary/50 hover:bg-brand-link transition-colors cursor-pointer"></div>
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-4">
+          <div class="w-20 h-4 rounded bg-content-primary"></div>
+          <div class="space-y-3">
+            <div class="w-28 h-3.5 rounded bg-content-tertiary/50 hover:bg-brand-link transition-colors cursor-pointer"></div>
+            <div class="w-20 h-3.5 rounded bg-content-tertiary/50 hover:bg-brand-link transition-colors cursor-pointer"></div>
+            <div class="w-24 h-3.5 rounded bg-content-tertiary/50 hover:bg-brand-link transition-colors cursor-pointer"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="w-full pt-8 border-t border-border-hairline flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-mono text-content-tertiary">
+        <div class="w-64 h-3.5 rounded bg-content-tertiary/30"></div>
+        <div class="flex items-center gap-6">
+          <div class="w-20 h-3.5 rounded bg-content-tertiary/30 hover:bg-brand-link cursor-pointer"></div>
+          <div class="w-24 h-3.5 rounded bg-content-tertiary/30 hover:bg-brand-link cursor-pointer"></div>
+          <div class="w-16 h-3.5 rounded bg-content-tertiary/30 hover:bg-brand-link cursor-pointer"></div>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Minimal Vanilla UI Interactions Script -->
+  <script>
+    function switchTab(idx) {
+      const buttons = document.querySelectorAll('.tab-btn');
+      buttons.forEach((btn, i) => {
+        if (i === idx) {
+          btn.className = "tab-btn flex-1 h-full rounded-pill bg-white shadow-subtle flex items-center justify-center px-4 transition-all duration-200";
+          btn.firstElementChild.className = "w-40 h-4 rounded bg-content-primary";
+        } else {
+          btn.className = "tab-btn flex-1 h-full rounded-pill bg-transparent hover:bg-white/50 flex items-center justify-center px-4 transition-all duration-200";
+          btn.firstElementChild.className = "w-36 h-4 rounded bg-content-muted";
+        }
+      });
+    }
+
+    function toggleAccordion(header) {
+      const parent = header.parentElement;
+      const body = parent.querySelector('.accordion-body');
+      const chevron = header.querySelector('.chevron');
+      if (body.classList.contains('hidden')) {
+        body.classList.remove('hidden');
+        chevron.classList.add('rotate-180');
+      } else {
+        body.classList.add('hidden');
+        chevron.classList.remove('rotate-180');
+      }
+    }
+  </script>
+
+</body>
+</html>
