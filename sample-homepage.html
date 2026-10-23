@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <title>Axiom | The Frontier AI Engineering Network</title>
   
   <!-- Fonts -->
@@ -16,6 +16,7 @@
     tailwind.config = {
       theme: {
         screens: {
+          'xs': '420px',
           'sm': '640px',
           'tablet': '810px',
           'md': '810px',
@@ -43,10 +44,10 @@
               canvas: '#FFFFFF',
               light: {
                 50: '#FAFAFA',
-                100: '#F7F7F8',
-                200: '#F5F5F5',
-                300: '#F2F4F7',
-                400: '#EBECED'
+                100: '#F5F5F5',
+                200: '#EEEEEE',
+                300: '#E5E5E5',
+                400: '#D4D4D4'
               },
               dark: {
                 900: '#0F0F10',
@@ -105,9 +106,8 @@
             'cta-horizon': 'linear-gradient(90deg, rgba(199, 243, 255, 0.38) 25%, #F7C7C8 100%)',
             'stat-cobalt': 'linear-gradient(225deg, rgba(25, 112, 194, 0.1) 0%, #1970C2 100%)',
             'stat-crimson': 'linear-gradient(202deg, rgba(163, 15, 15, 0.1) 0%, #A30F0F 100%)',
-            'stat-emerald': 'linear-gradient(202deg, rgba(17, 143, 44, 0.1) 0%, #0A7A22 94%)',
-            'stat-graphite': 'linear-gradient(202deg, rgba(34, 34, 34, 0.1) 0%, #222222 94%)',
-            'footer-fade': 'linear-gradient(180deg, #FFFFFF 31%, #EEEEEE 100%)'
+            'stat-emerald': 'linear-gradient(202deg, rgba(10, 122, 34, 0.1) 0%, #0A7A22 100%)',
+            'footer-fade': 'linear-gradient(180deg, #FFFFFF 0%, #F6F6F6 100%)'
           },
           animation: {
             'marquee': 'marquee 35s linear infinite'
@@ -123,31 +123,39 @@
     }
   </script>
   <link rel="stylesheet" href="./styles/tokens.css">
+  <style>
+    /* Mobile scrollbar and tap ergonomics */
+    .scrollbar-none::-webkit-scrollbar { display: none; }
+    .scrollbar-none { -ms-overflow-style: none; scrollbar-width: none; }
+    * { -webkit-tap-highlight-color: transparent; }
+  </style>
 </head>
 <body class="bg-surface-canvas text-content-primary font-sans antialiased selection:bg-brand-primary selection:text-white">
 
   <!-- Live Showcase Navigation Banner -->
-  <aside class="w-full bg-[#1A1C1E] text-white py-2.5 px-4 text-center text-xs font-mono flex items-center justify-center gap-2 border-b border-white/10 z-50 relative">
-    <span class="inline-block w-2 h-2 rounded-full bg-[#DAFF85] animate-pulse"></span>
-    <span>Viewing Outlier-Styled Live Sample Homepage (Axiom).</span>
-    <a href="index.html" class="underline font-semibold text-[#6BD4EB] hover:text-white ml-1">View Design Token Skeleton Wireframe &rarr;</a>
+  <aside class="w-full bg-[#1A1C1E] text-white py-2 px-3 sm:px-4 text-center text-[11px] sm:text-xs font-mono flex items-center justify-between sm:justify-center gap-2 border-b border-white/10 z-50 relative">
+    <div class="flex items-center gap-1.5 truncate">
+      <span class="inline-block w-2 h-2 rounded-full bg-[#DAFF85] animate-pulse shrink-0"></span>
+      <span class="truncate">Outlier Skill Engine: Axiom Live</span>
+    </div>
+    <a href="index.html" class="underline font-semibold text-[#6BD4EB] hover:text-white whitespace-nowrap shrink-0 ml-1">Skeleton View &rarr;</a>
   </aside>
 
   <!-- ========================================================================
-       1. FLOATING NAVIGATION BAR (79px, Sticky, Glass, Pill CTA)
+       1. FLOATING NAVIGATION BAR (72px/79px, Sticky, Glass, Pill CTA, Mobile Drawer)
        ======================================================================== -->
-  <header class="w-full h-[79px] sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-border-hairline transition-all duration-200">
-    <div class="max-w-[1280px] mx-auto h-full px-6 md:px-10 flex items-center justify-between">
+  <header class="w-full h-[68px] sm:h-[76px] sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-border-hairline transition-all duration-200">
+    <div class="max-w-[1280px] mx-auto h-full px-4 sm:px-6 md:px-10 flex items-center justify-between">
       
       <!-- Brand Logo -->
-      <a href="#" class="flex items-center gap-2.5 group">
-        <div class="w-8 h-8 rounded-lg bg-content-primary flex items-center justify-center transition-transform group-hover:scale-105">
-          <div class="w-3.5 h-3.5 rounded-full bg-brand-primary"></div>
+      <a href="#" class="flex items-center gap-2 group shrink-0">
+        <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-content-primary flex items-center justify-center transition-transform group-hover:scale-105">
+          <div class="w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full bg-brand-primary"></div>
         </div>
-        <span class="font-bold text-xl tracking-tight text-content-primary">AXIOM</span>
+        <span class="font-bold text-lg sm:text-xl tracking-tight text-content-primary">AXIOM</span>
       </a>
 
-      <!-- Center Links -->
+      <!-- Center Links (Desktop) -->
       <nav class="hidden md:flex items-center gap-8 text-[15px] font-medium text-content-secondary">
         <a href="#solutions" class="hover:text-brand-link transition-colors">Solutions</a>
         <a href="#network" class="hover:text-brand-link transition-colors">Specialist Network</a>
@@ -155,44 +163,72 @@
         <a href="#faq" class="hover:text-brand-link transition-colors">FAQs</a>
       </nav>
 
-      <!-- Right Action -->
-      <div class="flex items-center gap-5">
-        <a href="#login" class="hidden sm:inline-block text-[15px] font-medium text-content-secondary hover:text-brand-link transition-colors">Log In</a>
-        <a href="#cta" class="inline-flex items-center justify-center h-10 px-6 rounded-pill bg-brand-primary text-content-primary font-semibold text-sm transition-all duration-200 hover:bg-brand-hover hover:scale-[1.02] active:bg-brand-active active:scale-[0.98] shadow-subtle">
-          View Opportunities
+      <!-- Right Action Area -->
+      <div class="flex items-center gap-3 sm:gap-5">
+        <a href="#login" class="hidden sm:inline-block text-[14px] sm:text-[15px] font-medium text-content-secondary hover:text-brand-link transition-colors">Log In</a>
+        <a href="#cta" class="inline-flex items-center justify-center h-9 sm:h-10 px-4 sm:px-6 rounded-pill bg-brand-primary text-content-primary font-semibold text-xs sm:text-sm transition-all duration-200 hover:bg-brand-hover hover:scale-[1.02] active:bg-brand-active shadow-subtle shrink-0">
+          <span class="hidden xs:inline">View Opportunities</span>
+          <span class="xs:hidden">Explore</span>
         </a>
+
+        <!-- Mobile Hamburger Button -->
+        <button id="mobile-menu-toggle" onclick="toggleMobileNav()" class="md:hidden p-2 rounded-lg text-content-primary hover:bg-surface-light-100 transition-colors" aria-label="Toggle Navigation Menu">
+          <svg id="hamburger-icon" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+          <svg id="close-icon" class="w-6 h-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
       </div>
 
+    </div>
+
+    <!-- Mobile Slide-Down Menu Drawer (Solid Opaque White, High Elevation) -->
+    <div id="mobile-nav-drawer" class="hidden md:hidden fixed inset-x-0 top-[68px] sm:top-[76px] bg-white border-b border-border-hairline shadow-2xl px-6 py-6 flex flex-col gap-4 z-50 transition-all duration-200">
+      <nav class="flex flex-col gap-3 font-medium text-base text-content-secondary">
+        <a href="#solutions" onclick="toggleMobileNav()" class="py-2.5 px-3 rounded-lg hover:bg-surface-light-100 transition-colors">Solutions</a>
+        <a href="#network" onclick="toggleMobileNav()" class="py-2.5 px-3 rounded-lg hover:bg-surface-light-100 transition-colors">Specialist Network</a>
+        <a href="#benchmarks" onclick="toggleMobileNav()" class="py-2.5 px-3 rounded-lg hover:bg-surface-light-100 transition-colors">Benchmarks</a>
+        <a href="#faq" onclick="toggleMobileNav()" class="py-2.5 px-3 rounded-lg hover:bg-surface-light-100 transition-colors">FAQs</a>
+        <a href="#login" onclick="toggleMobileNav()" class="py-2.5 px-3 rounded-lg hover:bg-surface-light-100 transition-colors">Log In</a>
+      </nav>
+      <div class="pt-3 border-t border-border-hairline flex flex-col gap-3">
+        <a href="#cta" onclick="toggleMobileNav()" class="w-full h-11 flex items-center justify-center rounded-pill bg-brand-primary text-content-primary font-semibold text-sm shadow-subtle">
+          View All Workstreams
+        </a>
+      </div>
     </div>
   </header>
 
   <!-- ========================================================================
        2. HERO PRESENTATION SECTION
        ======================================================================== -->
-  <section class="w-full relative overflow-hidden bg-hero-fade pt-14 pb-16 md:py-20 flex flex-col items-center">
-    <div class="absolute -top-32 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-brand-primary/10 rounded-full blur-[100px] pointer-events-none" aria-hidden="true"></div>
+  <section class="w-full relative overflow-hidden bg-hero-fade pt-10 sm:pt-14 pb-12 sm:pb-16 md:py-20 flex flex-col items-center">
+    <!-- Atmospheric Ambient Glow -->
+    <div class="absolute -top-24 sm:-top-32 left-1/2 -translate-x-1/2 w-[340px] sm:w-[600px] md:w-[700px] h-[220px] sm:h-[350px] bg-brand-primary/10 rounded-full blur-[70px] sm:blur-[100px] pointer-events-none" aria-hidden="true"></div>
 
-    <div class="max-w-[1280px] w-full mx-auto px-6 md:px-10 flex flex-col items-center text-center relative z-10">
+    <div class="max-w-[1280px] w-full mx-auto px-4 sm:px-6 md:px-10 flex flex-col items-center text-center relative z-10">
       
       <!-- Eyebrow Badge -->
-      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-tint-300 border border-brand-deep/20 mb-6 shadow-sm">
-        <span class="w-2 h-2 rounded-full bg-brand-deep animate-pulse"></span>
-        <span class="text-xs md:text-sm font-semibold tracking-[2px] uppercase text-brand-deep">AUTONOMOUS REASONING NETWORK</span>
+      <div class="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-brand-tint-300 border border-brand-deep/20 mb-5 sm:mb-6 shadow-sm">
+        <span class="w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-brand-deep animate-pulse"></span>
+        <span class="text-[10px] sm:text-xs md:text-sm font-semibold tracking-[1.5px] sm:tracking-[2px] uppercase text-brand-deep">AUTONOMOUS REASONING NETWORK</span>
       </div>
 
-      <!-- Display Title (54px H1, -1.5px tracking) -->
-      <h1 class="max-w-[880px] text-4xl tablet:text-5xl desktop:text-[54px] font-semibold text-content-primary tracking-[-1.5px] leading-[1.18] mb-6">
+      <!-- Display Title (Responsive Fluid H1) -->
+      <h1 class="max-w-[880px] text-[32px] xs:text-4xl sm:text-5xl desktop:text-[54px] font-semibold text-content-primary tracking-[-0.8px] sm:tracking-[-1.5px] leading-[1.18] mb-4 sm:mb-6 px-1">
         Become the specialist that foundation AI learns from
       </h1>
 
-      <!-- Subtitle (20px, 1.5 line-height) -->
-      <p class="max-w-[660px] text-base md:text-xl text-content-tertiary leading-[1.5] mb-10">
+      <!-- Subtitle -->
+      <p class="max-w-[660px] text-sm sm:text-base md:text-xl text-content-tertiary leading-[1.5] mb-8 sm:mb-10 px-2">
         Join 500K+ PhDs, staff engineers, and domain researchers building, stress-testing, and aligning frontier reasoning models. Work flexibly from anywhere.
       </p>
 
       <!-- Primary Action Pill Button -->
-      <div class="flex flex-col sm:flex-row items-center gap-4 mb-16">
-        <a href="#cta" class="inline-flex items-center justify-center px-10 py-5 rounded-pill bg-brand-primary text-content-primary font-semibold text-lg transition-all duration-200 hover:bg-brand-hover hover:scale-[1.02] active:bg-brand-active shadow-glow-coral">
+      <div class="w-full sm:w-auto flex flex-col sm:flex-row items-center justify-center gap-4 mb-10 sm:mb-16 px-4">
+        <a href="#cta" class="w-full sm:w-auto max-w-xs inline-flex items-center justify-center px-8 sm:px-10 py-3.5 sm:py-5 rounded-pill bg-brand-primary text-content-primary font-semibold text-base sm:text-lg transition-all duration-200 hover:bg-brand-hover hover:scale-[1.02] active:bg-brand-active shadow-glow-coral text-center">
           Explore Open Workstreams
         </a>
       </div>
@@ -200,109 +236,109 @@
     </div>
 
     <!-- ========================================================================
-         3. CONTINUOUS DUAL-CARD MARQUEE TICKER
+         3. CONTINUOUS DUAL-CARD MARQUEE TICKER (Fluid Mobile-Scaled)
          ======================================================================== -->
-    <div class="w-full overflow-hidden py-4 select-none relative" aria-hidden="true">
-      <div class="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-surface-canvas to-transparent z-10 pointer-events-none"></div>
-      <div class="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-surface-canvas to-transparent z-10 pointer-events-none"></div>
+    <div class="w-full overflow-hidden py-2 sm:py-4 select-none relative" aria-hidden="true">
+      <div class="absolute left-0 top-0 bottom-0 w-8 sm:w-16 md:w-24 bg-gradient-to-r from-surface-canvas to-transparent z-10 pointer-events-none"></div>
+      <div class="absolute right-0 top-0 bottom-0 w-8 sm:w-16 md:w-24 bg-gradient-to-l from-surface-canvas to-transparent z-10 pointer-events-none"></div>
 
-      <div class="flex gap-5 w-max animate-marquee hover:[animation-play-state:paused]">
+      <div class="flex gap-3 sm:gap-4 md:gap-5 w-max animate-marquee hover:[animation-play-state:paused]">
         
         <!-- Item 1: Profile Card -->
-        <div class="w-[209px] h-[400px] flex flex-col justify-end">
-          <div class="w-[209px] h-[296px] rounded-card bg-surface-dark-900 relative overflow-hidden flex flex-col justify-end p-4 border border-border-hairline shadow-subtle group">
+        <div class="w-[155px] sm:w-[185px] md:w-[209px] h-[270px] sm:h-[330px] md:h-[400px] flex flex-col justify-end">
+          <div class="w-full h-[195px] sm:h-[245px] md:h-[296px] rounded-card bg-surface-dark-900 relative overflow-hidden flex flex-col justify-end p-3 sm:p-4 border border-border-hairline shadow-subtle group">
             <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80" alt="" class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-300">
             <div class="absolute inset-0 bg-gradient-to-t from-[#163F57]/95 via-[#163F57]/40 to-transparent"></div>
             <div class="relative z-10 text-white">
-              <h6 class="font-semibold text-base leading-tight">Dr. Elena Rostova</h6>
-              <span class="text-xs text-white/80 font-medium">Quantum Algorithms Specialist</span>
+              <h6 class="font-semibold text-xs sm:text-sm md:text-base leading-tight">Dr. Elena Rostova</h6>
+              <span class="text-[10px] sm:text-xs text-white/80 font-medium block truncate">Quantum Algorithms</span>
             </div>
           </div>
         </div>
 
         <!-- Item 2: Stat Card (Cobalt Blue) + Sub-Profile -->
-        <div class="w-[209px] h-[400px] flex flex-col justify-between">
-          <div class="w-[209px] h-[127px] rounded-card bg-stat-cobalt p-4 flex flex-col justify-between border border-white/10 shadow-card text-white">
-            <div class="text-[28px] font-semibold tracking-[-0.5px] leading-tight">$420M+</div>
-            <div class="text-sm font-medium text-white/90">Paid to specialists</div>
+        <div class="w-[155px] sm:w-[185px] md:w-[209px] h-[270px] sm:h-[330px] md:h-[400px] flex flex-col justify-between">
+          <div class="w-full h-[85px] sm:h-[105px] md:h-[127px] rounded-card bg-stat-cobalt p-2.5 sm:p-3.5 md:p-4 flex flex-col justify-between border border-white/10 shadow-card text-white">
+            <div class="text-xl sm:text-2xl md:text-[28px] font-semibold tracking-[-0.5px] leading-tight">$420M+</div>
+            <div class="text-[11px] sm:text-xs md:text-sm font-medium text-white/90">Paid to specialists</div>
           </div>
-          <div class="w-[209px] h-[250px] rounded-card bg-surface-dark-900 relative overflow-hidden flex flex-col justify-end p-4 border border-border-hairline">
+          <div class="w-full h-[170px] sm:h-[210px] md:h-[250px] rounded-card bg-surface-dark-900 relative overflow-hidden flex flex-col justify-end p-3 sm:p-4 border border-border-hairline">
             <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80" alt="" class="absolute inset-0 w-full h-full object-cover opacity-80">
             <div class="absolute inset-0 bg-gradient-to-t from-[#80137C]/95 via-[#80137C]/40 to-transparent"></div>
             <div class="relative z-10 text-white">
-              <h6 class="font-semibold text-base leading-tight">Marcus Chen</h6>
-              <span class="text-xs text-white/80 font-medium">Principal Rust Architect</span>
+              <h6 class="font-semibold text-xs sm:text-sm md:text-base leading-tight">Marcus Chen</h6>
+              <span class="text-[10px] sm:text-xs text-white/80 font-medium block truncate">Principal Rust Architect</span>
             </div>
           </div>
         </div>
 
         <!-- Item 3: Profile Card -->
-        <div class="w-[209px] h-[400px] flex flex-col justify-end">
-          <div class="w-[209px] h-[296px] rounded-card bg-surface-dark-900 relative overflow-hidden flex flex-col justify-end p-4 border border-border-hairline shadow-subtle">
+        <div class="w-[155px] sm:w-[185px] md:w-[209px] h-[270px] sm:h-[330px] md:h-[400px] flex flex-col justify-end">
+          <div class="w-full h-[195px] sm:h-[245px] md:h-[296px] rounded-card bg-surface-dark-900 relative overflow-hidden flex flex-col justify-end p-3 sm:p-4 border border-border-hairline shadow-subtle">
             <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80" alt="" class="absolute inset-0 w-full h-full object-cover opacity-80">
             <div class="absolute inset-0 bg-gradient-to-t from-[#0B7525]/95 via-[#0B7525]/40 to-transparent"></div>
             <div class="relative z-10 text-white">
-              <h6 class="font-semibold text-base leading-tight">Aria Thorne</h6>
-              <span class="text-xs text-white/80 font-medium">Formal Semantics Lead</span>
+              <h6 class="font-semibold text-xs sm:text-sm md:text-base leading-tight">Aria Thorne</h6>
+              <span class="text-[10px] sm:text-xs text-white/80 font-medium block truncate">Formal Semantics Lead</span>
             </div>
           </div>
         </div>
 
         <!-- Item 4: Profile Sub-card + Stat Card (Crimson) -->
-        <div class="w-[209px] h-[400px] flex flex-col justify-between">
-          <div class="w-[209px] h-[250px] rounded-card bg-surface-dark-900 relative overflow-hidden flex flex-col justify-end p-4 border border-border-hairline">
+        <div class="w-[155px] sm:w-[185px] md:w-[209px] h-[270px] sm:h-[330px] md:h-[400px] flex flex-col justify-between">
+          <div class="w-full h-[170px] sm:h-[210px] md:h-[250px] rounded-card bg-surface-dark-900 relative overflow-hidden flex flex-col justify-end p-3 sm:p-4 border border-border-hairline">
             <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80" alt="" class="absolute inset-0 w-full h-full object-cover opacity-80">
             <div class="absolute inset-0 bg-gradient-to-t from-[#7B8F0B]/95 via-[#7B8F0B]/40 to-transparent"></div>
             <div class="relative z-10 text-white">
-              <h6 class="font-semibold text-base leading-tight">David K. Park</h6>
-              <span class="text-xs text-white/80 font-medium">Biochemical Modeler</span>
+              <h6 class="font-semibold text-xs sm:text-sm md:text-base leading-tight">David K. Park</h6>
+              <span class="text-[10px] sm:text-xs text-white/80 font-medium block truncate">Biochemical Modeler</span>
             </div>
           </div>
-          <div class="w-[209px] h-[127px] rounded-card bg-stat-crimson p-4 flex flex-col justify-between border border-white/10 shadow-card text-white">
-            <div class="text-[28px] font-semibold tracking-[-0.5px] leading-tight">850K+</div>
-            <div class="text-sm font-medium text-white/90">Code rubrics certified</div>
+          <div class="w-full h-[85px] sm:h-[105px] md:h-[127px] rounded-card bg-stat-crimson p-2.5 sm:p-3.5 md:p-4 flex flex-col justify-between border border-white/10 shadow-card text-white">
+            <div class="text-xl sm:text-2xl md:text-[28px] font-semibold tracking-[-0.5px] leading-tight">850K+</div>
+            <div class="text-[11px] sm:text-xs md:text-sm font-medium text-white/90">Code rubrics certified</div>
           </div>
         </div>
 
         <!-- Item 5: Stat Card (Emerald) + Sub-Profile -->
-        <div class="w-[209px] h-[400px] flex flex-col justify-between">
-          <div class="w-[209px] h-[250px] rounded-card bg-surface-dark-900 relative overflow-hidden flex flex-col justify-end p-4 border border-border-hairline">
+        <div class="w-[155px] sm:w-[185px] md:w-[209px] h-[270px] sm:h-[330px] md:h-[400px] flex flex-col justify-between">
+          <div class="w-full h-[170px] sm:h-[210px] md:h-[250px] rounded-card bg-surface-dark-900 relative overflow-hidden flex flex-col justify-end p-3 sm:p-4 border border-border-hairline">
             <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=400&q=80" alt="" class="absolute inset-0 w-full h-full object-cover opacity-80">
             <div class="absolute inset-0 bg-gradient-to-t from-[#444444]/95 via-[#444444]/40 to-transparent"></div>
             <div class="relative z-10 text-white">
-              <h6 class="font-semibold text-base leading-tight">Zainab Al-Mansoor</h6>
-              <span class="text-xs text-white/80 font-medium">Arabic Linguistic Engine</span>
+              <h6 class="font-semibold text-xs sm:text-sm md:text-base leading-tight">Zainab Al-Mansoor</h6>
+              <span class="text-[10px] sm:text-xs text-white/80 font-medium block truncate">Arabic Linguistic Engine</span>
             </div>
           </div>
-          <div class="w-[209px] h-[127px] rounded-card bg-stat-emerald p-4 flex flex-col justify-between border border-white/10 shadow-card text-white">
-            <div class="text-[28px] font-semibold tracking-[-0.5px] leading-tight">4.9/5</div>
-            <div class="text-sm font-medium text-white/90">Verified peer benchmark</div>
+          <div class="w-full h-[85px] sm:h-[105px] md:h-[127px] rounded-card bg-stat-emerald p-2.5 sm:p-3.5 md:p-4 flex flex-col justify-between border border-white/10 shadow-card text-white">
+            <div class="text-xl sm:text-2xl md:text-[28px] font-semibold tracking-[-0.5px] leading-tight">4.9/5</div>
+            <div class="text-[11px] sm:text-xs md:text-sm font-medium text-white/90">Verified benchmark</div>
           </div>
         </div>
 
         <!-- DUPLICATE SEQUENCE FOR SEAMLESS LOOP -->
-        <div class="w-[209px] h-[400px] flex flex-col justify-end">
-          <div class="w-[209px] h-[296px] rounded-card bg-surface-dark-900 relative overflow-hidden flex flex-col justify-end p-4 border border-border-hairline shadow-subtle">
+        <div class="w-[155px] sm:w-[185px] md:w-[209px] h-[270px] sm:h-[330px] md:h-[400px] flex flex-col justify-end">
+          <div class="w-full h-[195px] sm:h-[245px] md:h-[296px] rounded-card bg-surface-dark-900 relative overflow-hidden flex flex-col justify-end p-3 sm:p-4 border border-border-hairline shadow-subtle">
             <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80" alt="" class="absolute inset-0 w-full h-full object-cover opacity-80">
             <div class="absolute inset-0 bg-gradient-to-t from-[#163F57]/95 via-[#163F57]/40 to-transparent"></div>
             <div class="relative z-10 text-white">
-              <h6 class="font-semibold text-base leading-tight">Dr. Elena Rostova</h6>
-              <span class="text-xs text-white/80 font-medium">Quantum Algorithms Specialist</span>
+              <h6 class="font-semibold text-xs sm:text-sm md:text-base leading-tight">Dr. Elena Rostova</h6>
+              <span class="text-[10px] sm:text-xs text-white/80 font-medium block truncate">Quantum Algorithms</span>
             </div>
           </div>
         </div>
 
-        <div class="w-[209px] h-[400px] flex flex-col justify-between">
-          <div class="w-[209px] h-[127px] rounded-card bg-stat-cobalt p-4 flex flex-col justify-between border border-white/10 shadow-card text-white">
-            <div class="text-[28px] font-semibold tracking-[-0.5px] leading-tight">$420M+</div>
-            <div class="text-sm font-medium text-white/90">Paid to specialists</div>
+        <div class="w-[155px] sm:w-[185px] md:w-[209px] h-[270px] sm:h-[330px] md:h-[400px] flex flex-col justify-between">
+          <div class="w-full h-[85px] sm:h-[105px] md:h-[127px] rounded-card bg-stat-cobalt p-2.5 sm:p-3.5 md:p-4 flex flex-col justify-between border border-white/10 shadow-card text-white">
+            <div class="text-xl sm:text-2xl md:text-[28px] font-semibold tracking-[-0.5px] leading-tight">$420M+</div>
+            <div class="text-[11px] sm:text-xs md:text-sm font-medium text-white/90">Paid to specialists</div>
           </div>
-          <div class="w-[209px] h-[250px] rounded-card bg-surface-dark-900 relative overflow-hidden flex flex-col justify-end p-4 border border-border-hairline">
+          <div class="w-full h-[170px] sm:h-[210px] md:h-[250px] rounded-card bg-surface-dark-900 relative overflow-hidden flex flex-col justify-end p-3 sm:p-4 border border-border-hairline">
             <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80" alt="" class="absolute inset-0 w-full h-full object-cover opacity-80">
             <div class="absolute inset-0 bg-gradient-to-t from-[#80137C]/95 via-[#80137C]/40 to-transparent"></div>
             <div class="relative z-10 text-white">
-              <h6 class="font-semibold text-base leading-tight">Marcus Chen</h6>
-              <span class="text-xs text-white/80 font-medium">Principal Rust Architect</span>
+              <h6 class="font-semibold text-xs sm:text-sm md:text-base leading-tight">Marcus Chen</h6>
+              <span class="text-[10px] sm:text-xs text-white/80 font-medium block truncate">Principal Rust Architect</span>
             </div>
           </div>
         </div>
@@ -313,62 +349,62 @@
   </section>
 
   <!-- ========================================================================
-       4. INTERACTIVE TABBED WORKBENCH (48px Radius, Pearlescent Gradient)
+       4. INTERACTIVE TABBED WORKBENCH (Responsive Tab Strip & Pearlescent Stage)
        ======================================================================== -->
-  <section class="w-full py-20 md:py-28 px-6 md:px-14 flex flex-col items-center bg-surface-canvas" id="solutions">
-    <div class="max-w-[1280px] w-full mx-auto flex flex-col items-center gap-12">
+  <section class="w-full py-14 sm:py-20 md:py-28 px-4 sm:px-6 md:px-14 flex flex-col items-center bg-surface-canvas" id="solutions">
+    <div class="max-w-[1280px] w-full mx-auto flex flex-col items-center gap-8 sm:gap-12">
       
       <!-- Section Header -->
-      <div class="flex flex-col items-center text-center max-w-[780px] gap-3">
-        <span class="text-xs md:text-sm font-semibold tracking-[2px] uppercase text-brand-deep">OPERATIONAL WORKBENCH</span>
-        <h2 class="text-3xl tablet:text-4xl desktop:text-[40px] font-semibold text-content-primary tracking-[-1.0px] leading-[1.25]">
+      <div class="flex flex-col items-center text-center max-w-[780px] gap-2.5 sm:gap-3 px-2">
+        <span class="text-[11px] sm:text-xs md:text-sm font-semibold tracking-[2px] uppercase text-brand-deep">OPERATIONAL WORKBENCH</span>
+        <h2 class="text-2xl sm:text-3xl tablet:text-4xl desktop:text-[40px] font-semibold text-content-primary tracking-[-0.6px] sm:tracking-[-1.0px] leading-[1.25]">
           How frontier scientists train neural reasoning
         </h2>
-        <p class="text-base text-content-tertiary max-w-[580px]">
+        <p class="text-sm sm:text-base text-content-tertiary max-w-[580px]">
           We partner with elite researchers across distributed systems, quantum information, and languages to generate rigorous alignment signals.
         </p>
       </div>
 
-      <!-- Segmented Pill Tab Bar (96px, 120px radius, #F5F5F5) -->
-      <div class="w-full max-w-[1160px] h-20 md:h-24 p-3 md:p-4 rounded-pill bg-surface-light-200 flex items-center gap-2 border border-border-hairline shadow-inner">
-        <button onclick="setTab(0)" id="tab-0" class="flex-1 h-full rounded-pill bg-white shadow-subtle flex items-center justify-center px-4 font-medium text-base md:text-lg text-content-primary transition-all duration-200">
+      <!-- Segmented Pill Tab Bar (Responsive: stacked pills on mobile, unified pill on desktop) -->
+      <div class="w-full max-w-[1160px] p-1.5 sm:p-2 md:p-3 rounded-2xl md:rounded-pill bg-surface-light-200 border border-border-hairline shadow-inner flex flex-col sm:flex-row gap-1.5 sm:gap-2">
+        <button onclick="setTab(0)" id="tab-0" class="tab-button w-full sm:flex-1 py-2.5 sm:py-3.5 md:py-4 px-3 sm:px-4 rounded-xl md:rounded-pill bg-white shadow-subtle flex items-center justify-center font-medium text-xs sm:text-sm md:text-base text-content-primary transition-all duration-200 text-center">
           Synthesize Adversarial Prompts
         </button>
-        <button onclick="setTab(1)" id="tab-1" class="flex-1 h-full rounded-pill bg-transparent hover:bg-white/50 flex items-center justify-center px-4 font-medium text-base md:text-lg text-content-muted transition-all duration-200">
+        <button onclick="setTab(1)" id="tab-1" class="tab-button w-full sm:flex-1 py-2.5 sm:py-3.5 md:py-4 px-3 sm:px-4 rounded-xl md:rounded-pill bg-transparent hover:bg-white/50 flex items-center justify-center font-medium text-xs sm:text-sm md:text-base text-content-muted transition-all duration-200 text-center">
           Build Verification Rubrics
         </button>
-        <button onclick="setTab(2)" id="tab-2" class="flex-1 h-full rounded-pill bg-transparent hover:bg-white/50 flex items-center justify-center px-4 font-medium text-base md:text-lg text-content-muted transition-all duration-200">
+        <button onclick="setTab(2)" id="tab-2" class="tab-button w-full sm:flex-1 py-2.5 sm:py-3.5 md:py-4 px-3 sm:px-4 rounded-xl md:rounded-pill bg-transparent hover:bg-white/50 flex items-center justify-center font-medium text-xs sm:text-sm md:text-base text-content-muted transition-all duration-200 text-center">
           Evaluate Multi-Turn Chains
         </button>
       </div>
 
-      <!-- Pearlescent Interactive Stage (48px Radius, 270deg Gradient) -->
-      <div class="w-full max-w-[1160px] rounded-banner bg-workbench-pearlescent p-8 md:p-14 border border-border-subtle/40 shadow-card flex flex-col lg:flex-row items-center gap-10 lg:gap-14">
+      <!-- Pearlescent Interactive Stage (Smooth organic radius on mobile, 48px on desktop) -->
+      <div class="w-full max-w-[1160px] rounded-[24px] sm:rounded-[32px] md:rounded-banner bg-workbench-pearlescent p-5 sm:p-8 md:p-14 border border-border-subtle/40 shadow-card flex flex-col lg:flex-row items-center gap-8 sm:gap-10 lg:gap-14">
         
         <!-- Left: Context Callouts -->
-        <div class="flex-1 flex flex-col gap-8 w-full" id="stage-context">
+        <div class="flex-1 flex flex-col gap-6 sm:gap-8 w-full" id="stage-context">
           <div class="space-y-2">
-            <h3 class="text-2xl md:text-[28px] font-semibold text-content-primary tracking-[-0.5px]" id="tab-title">
+            <h3 class="text-xl sm:text-2xl md:text-[28px] font-semibold text-content-primary tracking-[-0.5px]" id="tab-title">
               Craft High-Entropy Stress Cases
             </h3>
-            <p class="text-base text-content-tertiary" id="tab-subtitle">
+            <p class="text-sm sm:text-base text-content-tertiary" id="tab-subtitle">
               Design complex mathematical edge cases and distributed failure states that push frontier models into failure modes.
             </p>
           </div>
 
-          <div class="space-y-5">
+          <div class="space-y-3.5 sm:space-y-5">
             <!-- Why Card -->
-            <div class="p-6 rounded-container bg-white/75 backdrop-blur-sm border border-white/80 shadow-subtle">
-              <span class="text-xs font-mono font-bold uppercase tracking-wider text-brand-deep block mb-1.5">OBJECTIVE // WHY</span>
-              <p class="text-[15px] text-content-secondary leading-relaxed">
+            <div class="p-4 sm:p-6 rounded-xl md:rounded-container bg-white/80 backdrop-blur-sm border border-white/80 shadow-subtle">
+              <span class="text-[11px] sm:text-xs font-mono font-bold uppercase tracking-wider text-brand-deep block mb-1">OBJECTIVE // WHY</span>
+              <p class="text-xs sm:text-[15px] text-content-secondary leading-relaxed" id="tab-why">
                 Foundation models require non-trivial reasoning chains to prevent hallucinations and establish reliable formal proofs.
               </p>
             </div>
 
             <!-- How Card -->
-            <div class="p-6 rounded-container bg-white/75 backdrop-blur-sm border border-white/80 shadow-subtle">
-              <span class="text-xs font-mono font-bold uppercase tracking-wider text-brand-deep block mb-1.5">EXECUTION PROTOCOL // HOW</span>
-              <p class="text-[15px] text-content-secondary leading-relaxed">
+            <div class="p-4 sm:p-6 rounded-xl md:rounded-container bg-white/80 backdrop-blur-sm border border-white/80 shadow-subtle">
+              <span class="text-[11px] sm:text-xs font-mono font-bold uppercase tracking-wider text-brand-deep block mb-1">EXECUTION PROTOCOL // HOW</span>
+              <p class="text-xs sm:text-[15px] text-content-secondary leading-relaxed" id="tab-how">
                 Formulate a multi-step scenario in your specialization domain where naive reasoning fails, then provide the fully attested step-by-step resolution.
               </p>
             </div>
@@ -377,52 +413,51 @@
 
         <!-- Right: Code Simulator Workbench -->
         <div class="flex-1 w-full">
-          <div class="w-full rounded-container bg-white border border-border-hairline shadow-floating p-6 md:p-8 flex flex-col gap-6">
+          <div class="w-full rounded-2xl md:rounded-container bg-white border border-border-hairline shadow-floating p-4 sm:p-6 md:p-8 flex flex-col gap-4 sm:gap-6">
             
             <!-- Window Bar -->
-            <div class="flex items-center justify-between pb-4 border-b border-border-hairline">
-              <div class="flex items-center gap-2">
-                <span class="w-3 h-3 rounded-full bg-[#FF5F56]"></span>
-                <span class="w-3 h-3 rounded-full bg-[#FFBD2E]"></span>
-                <span class="w-3 h-3 rounded-full bg-[#27C93F]"></span>
+            <div class="flex items-center justify-between pb-3 sm:pb-4 border-b border-border-hairline">
+              <div class="flex items-center gap-1.5 sm:gap-2">
+                <span class="w-2.5 sm:w-3 h-2.5 sm:h-3 rounded-full bg-[#FF5F56]"></span>
+                <span class="w-2.5 sm:w-3 h-2.5 sm:h-3 rounded-full bg-[#FFBD2E]"></span>
+                <span class="w-2.5 sm:w-3 h-2.5 sm:h-3 rounded-full bg-[#27C93F]"></span>
               </div>
-              <span class="font-mono text-xs px-2.5 py-1 rounded-badge bg-surface-light-100 text-content-tertiary">reasoning_eval.rs</span>
+              <span class="font-mono text-[10px] sm:text-xs px-2.5 py-0.5 sm:py-1 rounded-badge bg-surface-light-100 text-content-tertiary">reasoning_eval.rs</span>
             </div>
 
-            <!-- Code Editor (Fragment Mono) -->
-            <div class="rounded-control bg-surface-light-100 p-4 font-mono text-[13px] leading-relaxed border border-border-hairline text-content-secondary overflow-x-auto">
-              <span class="text-purple-600">pub fn</span> <span class="text-blue-600">evaluate_consensus</span>(quorum: &amp;Quorum) -&gt; <span class="text-emerald-600">Result</span>&lt;Proof&gt; {<br>
-              &nbsp;&nbsp;<span class="text-content-muted">// Verify BFT invariant under Byzantine partitioned state</span><br>
-              &nbsp;&nbsp;<span class="text-purple-600">let</span> state = quorum.<span class="text-blue-600">verify_signature_threshold</span>(2/3)?;<br>
-              &nbsp;&nbsp;<span class="text-purple-600">match</span> state.<span class="text-blue-600">detect_equivocation</span>() {<br>
-              &nbsp;&nbsp;&nbsp;&nbsp;Equivocation::Detected(fault) =&gt; <span class="text-red-600">Err</span>(Fault::Byzantine(fault)),<br>
-              &nbsp;&nbsp;&nbsp;&nbsp;Equivocation::Clean =&gt; <span class="text-emerald-600">Ok</span>(state.<span class="text-blue-600">commit_block</span>()),<br>
-              &nbsp;&nbsp;}<br>
-              }
-            </div>
+            <!-- Code Editor (Fragment Mono with Horizontal Scroll) -->
+            <div class="rounded-lg md:rounded-control bg-surface-light-100 p-3 sm:p-4 font-mono text-[11px] sm:text-xs md:text-[13px] leading-relaxed border border-border-hairline text-content-secondary overflow-x-auto whitespace-pre scrollbar-none">
+<span class="text-purple-600 font-semibold">pub fn</span> <span class="text-blue-600">evaluate_consensus</span>(quorum: &amp;Quorum) -&gt; <span class="text-emerald-600">Result</span>&lt;Proof&gt; {
+  <span class="text-content-muted">// Verify BFT invariant under partitioned network</span>
+  <span class="text-purple-600">let</span> state = quorum.<span class="text-blue-600">verify_signature_threshold</span>(2/3)?;
+  <span class="text-purple-600">match</span> state.<span class="text-blue-600">detect_equivocation</span>() {
+    Equivocation::Detected(fault) =&gt; <span class="text-red-600">Err</span>(Fault::Byzantine(fault)),
+    Equivocation::Clean =&gt; <span class="text-emerald-600">Ok</span>(state.<span class="text-blue-600">commit_block</span>()),
+  }
+}</div>
 
             <!-- Rubrics Checklist with Domain Badges -->
-            <div class="space-y-3">
-              <div class="flex items-center justify-between p-3.5 rounded-control bg-surface-light-50 border border-border-hairline">
-                <div class="flex items-center gap-3">
-                  <span class="w-4 h-4 rounded bg-domain-lime-base flex items-center justify-center text-[10px] text-white font-bold">✓</span>
-                  <span class="text-sm font-medium text-content-primary">Mathematical Proof Correctness</span>
+            <div class="space-y-2.5 sm:space-y-3">
+              <div class="flex items-center justify-between p-2.5 sm:p-3.5 rounded-lg md:rounded-control bg-surface-light-50 border border-border-hairline gap-2">
+                <div class="flex items-center gap-2 sm:gap-3 truncate">
+                  <span class="w-3.5 sm:w-4 h-3.5 sm:h-4 rounded bg-domain-lime-base flex items-center justify-center text-[10px] text-white font-bold shrink-0">✓</span>
+                  <span class="text-xs sm:text-sm font-medium text-content-primary truncate">Mathematical Proof Correctness</span>
                 </div>
-                <span class="text-xs px-2.5 py-0.5 rounded-badge bg-domain-lime-bg text-domain-lime-dark font-medium">Attested</span>
+                <span class="text-[10px] sm:text-xs px-2 sm:px-2.5 py-0.5 rounded-badge bg-domain-lime-bg text-domain-lime-dark font-medium shrink-0">Attested</span>
               </div>
 
-              <div class="flex items-center justify-between p-3.5 rounded-control bg-surface-light-50 border border-border-hairline">
-                <div class="flex items-center gap-3">
-                  <span class="w-4 h-4 rounded bg-domain-purple-base flex items-center justify-center text-[10px] text-white font-bold">✓</span>
-                  <span class="text-sm font-medium text-content-primary">Byzantine Edge-Case Coverage</span>
+              <div class="flex items-center justify-between p-2.5 sm:p-3.5 rounded-lg md:rounded-control bg-surface-light-50 border border-border-hairline gap-2">
+                <div class="flex items-center gap-2 sm:gap-3 truncate">
+                  <span class="w-3.5 sm:w-4 h-3.5 sm:h-4 rounded bg-domain-purple-base flex items-center justify-center text-[10px] text-white font-bold shrink-0">✓</span>
+                  <span class="text-xs sm:text-sm font-medium text-content-primary truncate">Byzantine Edge-Case Coverage</span>
                 </div>
-                <span class="text-xs px-2.5 py-0.5 rounded-badge bg-domain-purple-bg text-domain-purple-dark font-medium">Level 4</span>
+                <span class="text-[10px] sm:text-xs px-2 sm:px-2.5 py-0.5 rounded-badge bg-domain-purple-bg text-domain-purple-dark font-medium shrink-0">Level 4</span>
               </div>
             </div>
 
             <!-- Action Button -->
-            <div class="flex justify-end pt-2">
-              <button class="h-10 px-6 rounded-pill bg-brand-primary text-content-primary font-semibold text-sm transition-all duration-200 hover:bg-brand-hover hover:scale-[1.02]">
+            <div class="flex justify-end pt-1 sm:pt-2">
+              <button class="w-full sm:w-auto h-9 sm:h-10 px-5 sm:px-6 rounded-pill bg-brand-primary text-content-primary font-semibold text-xs sm:text-sm transition-all duration-200 hover:bg-brand-hover hover:scale-[1.02] shadow-subtle">
                 Submit Evaluation
               </button>
             </div>
@@ -436,90 +471,90 @@
   </section>
 
   <!-- ========================================================================
-       5. 2x2 ASYMMETRIC BENEFIT GRID (568x420px, 12px Radius, #FFF to #EEE)
+       5. 2x2 ASYMMETRIC BENEFIT GRID (Responsive Heights & Padding)
        ======================================================================== -->
-  <section class="w-full py-20 md:py-28 px-6 md:px-14 flex flex-col items-center bg-white" id="network">
-    <div class="max-w-[1280px] w-full mx-auto flex flex-col items-center gap-12">
+  <section class="w-full py-14 sm:py-20 md:py-28 px-4 sm:px-6 md:px-14 flex flex-col items-center bg-white" id="network">
+    <div class="max-w-[1280px] w-full mx-auto flex flex-col items-center gap-8 sm:gap-12">
       
-      <div class="flex flex-col items-center text-center max-w-[800px] gap-3">
-        <span class="text-xs md:text-sm font-semibold tracking-[2px] uppercase text-brand-deep">SPECIALIST ADVANTAGES</span>
-        <h2 class="text-3xl tablet:text-4xl desktop:text-[40px] font-semibold text-content-primary tracking-[-1.0px] leading-[1.25]">
+      <div class="flex flex-col items-center text-center max-w-[800px] gap-2.5 sm:gap-3 px-2">
+        <span class="text-[11px] sm:text-xs md:text-sm font-semibold tracking-[2px] uppercase text-brand-deep">SPECIALIST ADVANTAGES</span>
+        <h2 class="text-2xl sm:text-3xl tablet:text-4xl desktop:text-[40px] font-semibold text-content-primary tracking-[-0.6px] sm:tracking-[-1.0px] leading-[1.25]">
           Built for high-caliber researchers and staff engineers
         </h2>
-        <p class="text-base text-content-tertiary max-w-[620px]">
+        <p class="text-sm sm:text-base text-content-tertiary max-w-[620px]">
           Contribute on your own terms with uncompromised flexibility, competitive remuneration, and direct access to state-of-the-art model weights.
         </p>
       </div>
 
       <!-- 2x2 Grid -->
-      <div class="w-full max-w-[1160px] grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="w-full max-w-[1160px] grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
         
         <!-- Benefit Card 1 -->
-        <div class="w-full h-[420px] rounded-card bg-card-subtle p-8 md:p-10 border border-border-hairline shadow-subtle flex flex-col justify-between hover:scale-[1.01] transition-transform duration-200">
-          <div class="w-full h-[220px] rounded-control bg-surface-light-100/70 flex items-center justify-center relative overflow-hidden border border-border-hairline">
-            <div class="w-28 h-28 rounded-full bg-brand-primary/10 flex items-center justify-center">
-              <svg class="w-12 h-12 text-brand-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <div class="w-full min-h-[300px] md:h-[420px] rounded-2xl md:rounded-card bg-card-subtle p-5 sm:p-8 md:p-10 border border-border-hairline shadow-subtle flex flex-col justify-between hover:scale-[1.01] transition-transform duration-200">
+          <div class="w-full h-[140px] sm:h-[180px] md:h-[220px] rounded-xl md:rounded-control bg-surface-light-100/70 flex items-center justify-center relative overflow-hidden border border-border-hairline mb-4 md:mb-0">
+            <div class="w-16 h-16 sm:w-20 sm:h-20 md:w-28 md:h-28 rounded-full bg-brand-primary/10 flex items-center justify-center">
+              <svg class="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 text-brand-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
               </svg>
             </div>
           </div>
           <div>
-            <h4 class="text-2xl font-semibold text-content-primary tracking-[-0.4px] leading-snug mb-2">
+            <h4 class="text-xl sm:text-2xl font-semibold text-content-primary tracking-[-0.4px] leading-snug mb-1.5 sm:mb-2">
               Work autonomously without minimum quotas
             </h4>
-            <p class="text-sm text-content-tertiary">
+            <p class="text-xs sm:text-sm text-content-tertiary leading-relaxed">
               Complete tasks on your schedule from anywhere in the world. Full flexibility with zero mandatory hours.
             </p>
           </div>
         </div>
 
         <!-- Benefit Card 2 -->
-        <div class="w-full h-[420px] rounded-card bg-card-subtle p-8 md:p-10 border border-border-hairline shadow-subtle flex flex-col justify-between hover:scale-[1.01] transition-transform duration-200">
-          <div class="w-full h-[220px] rounded-control bg-surface-light-100/70 flex items-center justify-center relative overflow-hidden border border-border-hairline">
-            <div class="w-32 h-16 rounded-pill bg-domain-lime-light/40 flex items-center justify-center border border-domain-lime-base/30">
-              <span class="font-mono text-xl font-bold text-domain-lime-dark">$150/hr+</span>
+        <div class="w-full min-h-[300px] md:h-[420px] rounded-2xl md:rounded-card bg-card-subtle p-5 sm:p-8 md:p-10 border border-border-hairline shadow-subtle flex flex-col justify-between hover:scale-[1.01] transition-transform duration-200">
+          <div class="w-full h-[140px] sm:h-[180px] md:h-[220px] rounded-xl md:rounded-control bg-surface-light-100/70 flex items-center justify-center relative overflow-hidden border border-border-hairline mb-4 md:mb-0">
+            <div class="px-5 py-2.5 sm:px-6 sm:py-3 rounded-pill bg-domain-lime-light/40 flex items-center justify-center border border-domain-lime-base/30">
+              <span class="font-mono text-lg sm:text-xl font-bold text-domain-lime-dark">$150/hr+</span>
             </div>
           </div>
           <div>
-            <h4 class="text-2xl font-semibold text-content-primary tracking-[-0.4px] leading-snug mb-2">
+            <h4 class="text-xl sm:text-2xl font-semibold text-content-primary tracking-[-0.4px] leading-snug mb-1.5 sm:mb-2">
               Competitive compensation paid weekly
             </h4>
-            <p class="text-sm text-content-tertiary">
+            <p class="text-xs sm:text-sm text-content-tertiary leading-relaxed">
               Direct weekly disbursements with performance-based rewards on high-complexity technical deliverables.
             </p>
           </div>
         </div>
 
         <!-- Benefit Card 3 -->
-        <div class="w-full h-[420px] rounded-card bg-card-subtle p-8 md:p-10 border border-border-hairline shadow-subtle flex flex-col justify-between hover:scale-[1.01] transition-transform duration-200">
-          <div class="w-full h-[220px] rounded-control bg-surface-light-100/70 flex items-center justify-center relative overflow-hidden border border-border-hairline gap-3">
-            <span class="px-4 py-2 rounded-container bg-domain-purple-light/50 font-mono text-xs font-semibold text-domain-purple-dark">Weights API</span>
-            <span class="px-4 py-2 rounded-container bg-domain-cyan-light/50 font-mono text-xs font-semibold text-domain-cyan-dark">H100 Cluster</span>
+        <div class="w-full min-h-[300px] md:h-[420px] rounded-2xl md:rounded-card bg-card-subtle p-5 sm:p-8 md:p-10 border border-border-hairline shadow-subtle flex flex-col justify-between hover:scale-[1.01] transition-transform duration-200">
+          <div class="w-full h-[140px] sm:h-[180px] md:h-[220px] rounded-xl md:rounded-control bg-surface-light-100/70 flex items-center justify-center relative overflow-hidden border border-border-hairline gap-2 sm:gap-3 mb-4 md:mb-0">
+            <span class="px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg bg-domain-purple-light/50 font-mono text-[11px] sm:text-xs font-semibold text-domain-purple-dark">Weights API</span>
+            <span class="px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg bg-domain-cyan-light/50 font-mono text-[11px] sm:text-xs font-semibold text-domain-cyan-dark">H100 Cluster</span>
           </div>
           <div>
-            <h4 class="text-2xl font-semibold text-content-primary tracking-[-0.4px] leading-snug mb-2">
+            <h4 class="text-xl sm:text-2xl font-semibold text-content-primary tracking-[-0.4px] leading-snug mb-1.5 sm:mb-2">
               Unrestricted access to frontier model weights
             </h4>
-            <p class="text-sm text-content-tertiary">
+            <p class="text-xs sm:text-sm text-content-tertiary leading-relaxed">
               Benchmark using state-of-the-art closed and open weights with dedicated high-performance computing clusters.
             </p>
           </div>
         </div>
 
         <!-- Benefit Card 4 -->
-        <div class="w-full h-[420px] rounded-card bg-card-subtle p-8 md:p-10 border border-border-hairline shadow-subtle flex flex-col justify-between hover:scale-[1.01] transition-transform duration-200">
-          <div class="w-full h-[220px] rounded-control bg-surface-light-100/70 flex items-center justify-center relative overflow-hidden border border-border-hairline">
-            <div class="w-24 h-24 rounded-full bg-domain-amber-light/40 flex items-center justify-center border border-domain-amber-base/30">
-              <svg class="w-10 h-10 text-domain-amber-dark" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <div class="w-full min-h-[300px] md:h-[420px] rounded-2xl md:rounded-card bg-card-subtle p-5 sm:p-8 md:p-10 border border-border-hairline shadow-subtle flex flex-col justify-between hover:scale-[1.01] transition-transform duration-200">
+          <div class="w-full h-[140px] sm:h-[180px] md:h-[220px] rounded-xl md:rounded-control bg-surface-light-100/70 flex items-center justify-center relative overflow-hidden border border-border-hairline mb-4 md:mb-0">
+            <div class="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full bg-domain-amber-light/40 flex items-center justify-center border border-domain-amber-base/30">
+              <svg class="w-7 h-7 sm:w-9 sm:h-9 md:w-10 md:h-10 text-domain-amber-dark" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
               </svg>
             </div>
           </div>
           <div>
-            <h4 class="text-2xl font-semibold text-content-primary tracking-[-0.4px] leading-snug mb-2">
+            <h4 class="text-xl sm:text-2xl font-semibold text-content-primary tracking-[-0.4px] leading-snug mb-1.5 sm:mb-2">
               Connect with leading research institutions
             </h4>
-            <p class="text-sm text-content-tertiary">
+            <p class="text-xs sm:text-sm text-content-tertiary leading-relaxed">
               Join collaborative sprint channels alongside university faculty, top AI lab researchers, and peer experts.
             </p>
           </div>
@@ -531,75 +566,75 @@
   </section>
 
   <!-- ========================================================================
-       6. TESTIMONIALS SLIDING CAROUSEL (340x604px, Italic Quotes)
+       6. TESTIMONIALS SLIDING CAROUSEL (Touch Swipable & Responsive)
        ======================================================================== -->
-  <section class="w-full py-20 md:py-28 px-6 md:px-14 flex flex-col items-center bg-surface-light-50">
-    <div class="max-w-[1280px] w-full mx-auto flex flex-col items-center gap-12">
+  <section class="w-full py-14 sm:py-20 md:py-28 px-4 sm:px-6 md:px-14 flex flex-col items-center bg-surface-light-50">
+    <div class="max-w-[1280px] w-full mx-auto flex flex-col items-center gap-8 sm:gap-12">
       
-      <div class="flex flex-col items-center text-center max-w-[800px] gap-3">
-        <span class="text-xs md:text-sm font-semibold tracking-[2px] uppercase text-brand-deep">RESEARCH COMMUNITY</span>
-        <h2 class="text-3xl tablet:text-4xl desktop:text-[40px] font-semibold text-content-primary tracking-[-1.0px] leading-[1.25]">
+      <div class="flex flex-col items-center text-center max-w-[800px] gap-2.5 sm:gap-3 px-2">
+        <span class="text-[11px] sm:text-xs md:text-sm font-semibold tracking-[2px] uppercase text-brand-deep">RESEARCH COMMUNITY</span>
+        <h2 class="text-2xl sm:text-3xl tablet:text-4xl desktop:text-[40px] font-semibold text-content-primary tracking-[-0.6px] sm:tracking-[-1.0px] leading-[1.25]">
           Attested by specialists shaping artificial cognition
         </h2>
       </div>
 
       <!-- Sliding Cards Track -->
       <div class="w-full max-w-[1160px] relative overflow-hidden">
-        <div class="flex gap-6 overflow-x-auto pb-4 scrollbar-none snap-x snap-mandatory">
+        <div id="testimonials-track" class="flex gap-4 sm:gap-6 overflow-x-auto pb-4 scrollbar-none snap-x snap-mandatory">
           
           <!-- Card 1 -->
-          <div class="min-w-[320px] md:min-w-[340px] h-[604px] rounded-card bg-white border border-border-hairline shadow-subtle p-6 flex flex-col justify-between snap-start">
-            <div class="w-full h-[340px] rounded-card bg-surface-dark-900 relative overflow-hidden">
+          <div class="w-[82vw] max-w-[340px] shrink-0 h-auto md:h-[604px] rounded-2xl md:rounded-card bg-white border border-border-hairline shadow-subtle p-5 sm:p-6 flex flex-col justify-between snap-start">
+            <div class="w-full h-[220px] sm:h-[280px] md:h-[340px] rounded-xl md:rounded-card bg-surface-dark-900 relative overflow-hidden mb-4">
               <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80" alt="" class="w-full h-full object-cover">
-              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-4">
-                <span class="text-xs font-mono text-white/90 bg-white/20 px-2 py-0.5 rounded backdrop-blur-sm">MIT CSAIL Alum</span>
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-3.5 sm:p-4">
+                <span class="text-[10px] sm:text-xs font-mono text-white/90 bg-white/20 px-2 py-0.5 rounded backdrop-blur-sm">MIT CSAIL Alum</span>
               </div>
             </div>
-            <div class="space-y-3 pt-2">
-              <p class="font-serif italic text-lg leading-[1.8] text-surface-dark-800">
+            <div class="space-y-2.5 sm:space-y-3 pt-1">
+              <p class="font-serif italic text-base sm:text-lg leading-[1.6] sm:leading-[1.8] text-surface-dark-800">
                 "The engineering rigor is unparalleled. You aren't tagging cat pictures; you're finding subtle edge cases in distributed consensus protocols."
               </p>
-              <div class="pt-3 border-t border-border-hairline">
-                <h6 class="font-semibold text-base text-content-primary">Dr. Sarah Lin</h6>
-                <p class="text-xs text-content-tertiary">Senior Distributed Systems Researcher</p>
+              <div class="pt-2.5 sm:pt-3 border-t border-border-hairline">
+                <h6 class="font-semibold text-sm sm:text-base text-content-primary">Dr. Sarah Lin</h6>
+                <p class="text-[11px] sm:text-xs text-content-tertiary">Senior Distributed Systems Researcher</p>
               </div>
             </div>
           </div>
 
           <!-- Card 2 -->
-          <div class="min-w-[320px] md:min-w-[340px] h-[604px] rounded-card bg-white border border-border-hairline shadow-subtle p-6 flex flex-col justify-between snap-start">
-            <div class="w-full h-[340px] rounded-card bg-surface-dark-900 relative overflow-hidden">
+          <div class="w-[82vw] max-w-[340px] shrink-0 h-auto md:h-[604px] rounded-2xl md:rounded-card bg-white border border-border-hairline shadow-subtle p-5 sm:p-6 flex flex-col justify-between snap-start">
+            <div class="w-full h-[220px] sm:h-[280px] md:h-[340px] rounded-xl md:rounded-card bg-surface-dark-900 relative overflow-hidden mb-4">
               <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=600&q=80" alt="" class="w-full h-full object-cover">
-              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-4">
-                <span class="text-xs font-mono text-white/90 bg-white/20 px-2 py-0.5 rounded backdrop-blur-sm">Oxford Mathematics</span>
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-3.5 sm:p-4">
+                <span class="text-[10px] sm:text-xs font-mono text-white/90 bg-white/20 px-2 py-0.5 rounded backdrop-blur-sm">Oxford Mathematics</span>
               </div>
             </div>
-            <div class="space-y-3 pt-2">
-              <p class="font-serif italic text-lg leading-[1.8] text-surface-dark-800">
+            <div class="space-y-2.5 sm:space-y-3 pt-1">
+              <p class="font-serif italic text-base sm:text-lg leading-[1.6] sm:leading-[1.8] text-surface-dark-800">
                 "I earned a full secondary income while finishing my postdoctoral thesis. The transparency in rubric scoring makes every hour predictable."
               </p>
-              <div class="pt-3 border-t border-border-hairline">
-                <h6 class="font-semibold text-base text-content-primary">James Thornton</h6>
-                <p class="text-xs text-content-tertiary">Pure Mathematics Specialist</p>
+              <div class="pt-2.5 sm:pt-3 border-t border-border-hairline">
+                <h6 class="font-semibold text-sm sm:text-base text-content-primary">James Thornton</h6>
+                <p class="text-[11px] sm:text-xs text-content-tertiary">Pure Mathematics Specialist</p>
               </div>
             </div>
           </div>
 
           <!-- Card 3 -->
-          <div class="min-w-[320px] md:min-w-[340px] h-[604px] rounded-card bg-white border border-border-hairline shadow-subtle p-6 flex flex-col justify-between snap-start">
-            <div class="w-full h-[340px] rounded-card bg-surface-dark-900 relative overflow-hidden">
+          <div class="w-[82vw] max-w-[340px] shrink-0 h-auto md:h-[604px] rounded-2xl md:rounded-card bg-white border border-border-hairline shadow-subtle p-5 sm:p-6 flex flex-col justify-between snap-start">
+            <div class="w-full h-[220px] sm:h-[280px] md:h-[340px] rounded-xl md:rounded-card bg-surface-dark-900 relative overflow-hidden mb-4">
               <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=600&q=80" alt="" class="w-full h-full object-cover">
-              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-4">
-                <span class="text-xs font-mono text-white/90 bg-white/20 px-2 py-0.5 rounded backdrop-blur-sm">Ex-DeepMind</span>
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-3.5 sm:p-4">
+                <span class="text-[10px] sm:text-xs font-mono text-white/90 bg-white/20 px-2 py-0.5 rounded backdrop-blur-sm">Ex-DeepMind</span>
               </div>
             </div>
-            <div class="space-y-3 pt-2">
-              <p class="font-serif italic text-lg leading-[1.8] text-surface-dark-800">
+            <div class="space-y-2.5 sm:space-y-3 pt-1">
+              <p class="font-serif italic text-base sm:text-lg leading-[1.6] sm:leading-[1.8] text-surface-dark-800">
                 "The community of peers in our reinforcement track is top tier. You get immediate technical critique from researchers who truly understand the math."
               </p>
-              <div class="pt-3 border-t border-border-hairline">
-                <h6 class="font-semibold text-base text-content-primary">Nadia Volkova</h6>
-                <p class="text-xs text-content-tertiary">RL Alignment Engineer</p>
+              <div class="pt-2.5 sm:pt-3 border-t border-border-hairline">
+                <h6 class="font-semibold text-sm sm:text-base text-content-primary">Nadia Volkova</h6>
+                <p class="text-[11px] sm:text-xs text-content-tertiary">RL Alignment Engineer</p>
               </div>
             </div>
           </div>
@@ -607,14 +642,14 @@
         </div>
 
         <!-- Carousel Navigation Arrows -->
-        <div class="flex items-center justify-center gap-4 mt-8">
-          <button class="w-[54px] h-[54px] rounded-full bg-border-light hover:bg-surface-light-400 flex items-center justify-center transition-colors shadow-subtle" aria-label="Previous Slide">
-            <svg class="w-5 h-5 text-content-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <div class="flex items-center justify-center gap-3 sm:gap-4 mt-6 sm:mt-8">
+          <button onclick="scrollCarousel(-1)" class="w-11 h-11 sm:w-[52px] sm:h-[52px] rounded-full bg-border-light hover:bg-surface-light-400 active:scale-95 flex items-center justify-center transition-all shadow-subtle" aria-label="Previous Slide">
+            <svg class="w-4 h-4 sm:w-5 sm:h-5 text-content-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
             </svg>
           </button>
-          <button class="w-[54px] h-[54px] rounded-full bg-border-light hover:bg-surface-light-400 flex items-center justify-center transition-colors shadow-subtle" aria-label="Next Slide">
-            <svg class="w-5 h-5 text-content-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <button onclick="scrollCarousel(1)" class="w-11 h-11 sm:w-[52px] sm:h-[52px] rounded-full bg-border-light hover:bg-surface-light-400 active:scale-95 flex items-center justify-center transition-all shadow-subtle" aria-label="Next Slide">
+            <svg class="w-4 h-4 sm:w-5 sm:h-5 text-content-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
             </svg>
           </button>
@@ -625,93 +660,93 @@
   </section>
 
   <!-- ========================================================================
-       7. 4-STEP PROGRESSIVE ONBOARDING TIMELINE
+       7. 4-STEP PROGRESSIVE ONBOARDING TIMELINE (Interactive Tab Switching)
        ======================================================================== -->
-  <section class="w-full py-20 md:py-28 px-6 md:px-14 flex flex-col items-center bg-white" id="benchmarks">
-    <div class="max-w-[1280px] w-full mx-auto flex flex-col items-center gap-12">
+  <section class="w-full py-14 sm:py-20 md:py-28 px-4 sm:px-6 md:px-14 flex flex-col items-center bg-white" id="benchmarks">
+    <div class="max-w-[1280px] w-full mx-auto flex flex-col items-center gap-8 sm:gap-12">
       
-      <div class="flex flex-col items-center text-center max-w-[800px] gap-3">
-        <span class="text-xs md:text-sm font-semibold tracking-[2px] uppercase text-brand-deep">GET STARTED</span>
-        <h2 class="text-3xl tablet:text-4xl desktop:text-[40px] font-semibold text-content-primary tracking-[-1.0px] leading-[1.25]">
+      <div class="flex flex-col items-center text-center max-w-[800px] gap-2.5 sm:gap-3 px-2">
+        <span class="text-[11px] sm:text-xs md:text-sm font-semibold tracking-[2px] uppercase text-brand-deep">GET STARTED</span>
+        <h2 class="text-2xl sm:text-3xl tablet:text-4xl desktop:text-[40px] font-semibold text-content-primary tracking-[-0.6px] sm:tracking-[-1.0px] leading-[1.25]">
           Onboard in 4 streamlined steps
         </h2>
       </div>
 
       <!-- Split Layout -->
-      <div class="w-full max-w-[1160px] flex flex-col lg:flex-row items-center gap-10 lg:gap-12">
+      <div class="w-full max-w-[1160px] flex flex-col lg:flex-row items-center gap-8 sm:gap-10 lg:gap-12">
         
         <!-- Left: Step List -->
-        <div class="flex-1 w-full space-y-4">
+        <div class="flex-1 w-full space-y-3 sm:space-y-4">
           
-          <div class="p-6 rounded-card bg-surface-light-100 border-l-4 border-brand-primary shadow-subtle flex items-start gap-5 transition-all">
-            <span class="font-mono text-2xl font-bold text-brand-deep">01</span>
+          <div onclick="selectStep(1)" id="step-card-1" class="step-card p-4 sm:p-6 rounded-xl md:rounded-card bg-surface-light-100 border-l-4 border-brand-primary shadow-subtle flex items-start gap-4 sm:gap-5 transition-all cursor-pointer">
+            <span class="font-mono text-xl sm:text-2xl font-bold text-brand-deep">01</span>
             <div class="space-y-1">
-              <h5 class="text-lg font-semibold text-content-primary">Create Your Research Profile</h5>
-              <p class="text-sm text-content-tertiary">Declare your domain specializations, academic credentials, and software engineering proficiencies.</p>
+              <h5 class="text-base sm:text-lg font-semibold text-content-primary">Create Your Research Profile</h5>
+              <p class="text-xs sm:text-sm text-content-tertiary">Declare your domain specializations, academic credentials, and software engineering proficiencies.</p>
             </div>
           </div>
 
-          <div class="p-6 rounded-card bg-white border border-border-hairline flex items-start gap-5 hover:bg-surface-light-50 transition-colors cursor-pointer">
-            <span class="font-mono text-2xl font-bold text-content-muted">02</span>
+          <div onclick="selectStep(2)" id="step-card-2" class="step-card p-4 sm:p-6 rounded-xl md:rounded-card bg-white border border-border-hairline flex items-start gap-4 sm:gap-5 hover:bg-surface-light-50 transition-colors cursor-pointer">
+            <span class="font-mono text-xl sm:text-2xl font-bold text-content-muted">02</span>
             <div class="space-y-1">
-              <h5 class="text-lg font-semibold text-content-secondary">Complete Domain Screening</h5>
-              <p class="text-sm text-content-tertiary">Take an automated 30-minute qualification assessment to benchmark your expertise against live rubrics.</p>
+              <h5 class="text-base sm:text-lg font-semibold text-content-secondary">Complete Domain Screening</h5>
+              <p class="text-xs sm:text-sm text-content-tertiary">Take an automated 30-minute qualification assessment to benchmark your expertise against live rubrics.</p>
             </div>
           </div>
 
-          <div class="p-6 rounded-card bg-white border border-border-hairline flex items-start gap-5 hover:bg-surface-light-50 transition-colors cursor-pointer">
-            <span class="font-mono text-2xl font-bold text-content-muted">03</span>
+          <div onclick="selectStep(3)" id="step-card-3" class="step-card p-4 sm:p-6 rounded-xl md:rounded-card bg-white border border-border-hairline flex items-start gap-4 sm:gap-5 hover:bg-surface-light-50 transition-colors cursor-pointer">
+            <span class="font-mono text-xl sm:text-2xl font-bold text-content-muted">03</span>
             <div class="space-y-1">
-              <h5 class="text-lg font-semibold text-content-secondary">Attest Identity Credentials</h5>
-              <p class="text-sm text-content-tertiary">Complete fast cryptographic KYC verification to protect the network's data provenance.</p>
+              <h5 class="text-base sm:text-lg font-semibold text-content-secondary">Attest Identity Credentials</h5>
+              <p class="text-xs sm:text-sm text-content-tertiary">Complete fast cryptographic KYC verification to protect the network's data provenance.</p>
             </div>
           </div>
 
-          <div class="p-6 rounded-card bg-white border border-border-hairline flex items-start gap-5 hover:bg-surface-light-50 transition-colors cursor-pointer">
-            <span class="font-mono text-2xl font-bold text-content-muted">04</span>
+          <div onclick="selectStep(4)" id="step-card-4" class="step-card p-4 sm:p-6 rounded-xl md:rounded-card bg-white border border-border-hairline flex items-start gap-4 sm:gap-5 hover:bg-surface-light-50 transition-colors cursor-pointer">
+            <span class="font-mono text-xl sm:text-2xl font-bold text-content-muted">04</span>
             <div class="space-y-1">
-              <h5 class="text-lg font-semibold text-content-secondary">Enter Active Workstreams</h5>
-              <p class="text-sm text-content-tertiary">Receive immediate project allocations matching your domain and begin earning weekly.</p>
+              <h5 class="text-base sm:text-lg font-semibold text-content-secondary">Enter Active Workstreams</h5>
+              <p class="text-xs sm:text-sm text-content-tertiary">Receive immediate project allocations matching your domain and begin earning weekly.</p>
             </div>
           </div>
 
         </div>
 
-        <!-- Right: Glow Preview Card (564x451px) -->
+        <!-- Right: Glow Preview Card -->
         <div class="flex-1 w-full flex justify-center">
-          <div class="w-full max-w-[564px] h-[451px] rounded-container bg-timeline-glow p-2 border border-border-subtle/30 shadow-card flex items-center justify-center">
+          <div class="w-full max-w-[564px] h-auto min-h-[380px] sm:min-h-[420px] md:h-[451px] rounded-2xl md:rounded-container bg-timeline-glow p-1.5 sm:p-2 border border-border-subtle/30 shadow-card flex items-center justify-center">
             
-            <div class="w-full h-full rounded-card bg-white p-6 flex flex-col justify-between shadow-subtle border border-white/80">
+            <div class="w-full h-full rounded-xl md:rounded-card bg-white p-4 sm:p-6 flex flex-col justify-between shadow-subtle border border-white/80 gap-4">
               
-              <div class="flex items-center justify-between pb-4 border-b border-border-hairline">
-                <span class="font-semibold text-base text-content-primary">Domain Clearance Verification</span>
-                <span class="text-xs px-2.5 py-1 rounded-badge bg-domain-lime-bg text-domain-lime-dark font-medium">99.4% Match</span>
+              <div class="flex items-center justify-between pb-3 sm:pb-4 border-b border-border-hairline">
+                <span class="font-semibold text-sm sm:text-base text-content-primary" id="preview-title">Domain Clearance Verification</span>
+                <span class="text-[10px] sm:text-xs px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-badge bg-domain-lime-bg text-domain-lime-dark font-medium" id="preview-badge">99.4% Match</span>
               </div>
 
-              <div class="space-y-4 my-auto">
+              <div class="space-y-3 sm:space-y-4 my-auto">
                 <div class="space-y-1">
-                  <span class="text-xs font-medium text-content-tertiary">Attested Technical Categories</span>
-                  <div class="flex flex-wrap gap-2 pt-1">
-                    <span class="text-xs px-3 py-1 rounded-pill bg-domain-purple-bg text-domain-purple-dark font-medium">Distributed Systems</span>
-                    <span class="text-xs px-3 py-1 rounded-pill bg-domain-cyan-bg text-domain-cyan-dark font-medium">Rust Architecture</span>
-                    <span class="text-xs px-3 py-1 rounded-pill bg-domain-amber-bg text-domain-amber-dark font-medium">Quantum Comp</span>
+                  <span class="text-[11px] sm:text-xs font-medium text-content-tertiary">Attested Technical Categories</span>
+                  <div class="flex flex-wrap gap-1.5 sm:gap-2 pt-1">
+                    <span class="text-[11px] sm:text-xs px-2.5 sm:px-3 py-1 rounded-pill bg-domain-purple-bg text-domain-purple-dark font-medium">Distributed Systems</span>
+                    <span class="text-[11px] sm:text-xs px-2.5 sm:px-3 py-1 rounded-pill bg-domain-cyan-bg text-domain-cyan-dark font-medium">Rust Architecture</span>
+                    <span class="text-[11px] sm:text-xs px-2.5 sm:px-3 py-1 rounded-pill bg-domain-amber-bg text-domain-amber-dark font-medium">Quantum Comp</span>
                   </div>
                 </div>
 
-                <div class="p-4 rounded-control bg-surface-light-100 border border-border-hairline space-y-2">
-                  <div class="flex justify-between text-xs">
+                <div class="p-3 sm:p-4 rounded-lg md:rounded-control bg-surface-light-100 border border-border-hairline space-y-1.5 sm:space-y-2">
+                  <div class="flex justify-between text-[11px] sm:text-xs">
                     <span class="text-content-tertiary">Screening Benchmark Status</span>
-                    <span class="text-emerald-600 font-semibold">Passed (Top 1%)</span>
+                    <span class="text-emerald-600 font-semibold" id="preview-status">Passed (Top 1%)</span>
                   </div>
                   <div class="w-full h-2 rounded-full bg-surface-light-300 overflow-hidden">
-                    <div class="w-[96%] h-full bg-brand-primary rounded-full"></div>
+                    <div id="preview-bar" class="w-[96%] h-full bg-brand-primary rounded-full transition-all duration-300"></div>
                   </div>
                 </div>
               </div>
 
-              <div class="pt-4 border-t border-border-hairline flex items-center justify-between">
-                <span class="text-xs text-content-muted">Ready to deploy immediately</span>
-                <button class="h-9 px-6 rounded-pill bg-brand-primary text-content-primary font-semibold text-xs transition-all hover:bg-brand-hover">
+              <div class="pt-3 sm:pt-4 border-t border-border-hairline flex items-center justify-between gap-3">
+                <span class="text-[11px] sm:text-xs text-content-muted">Ready to deploy immediately</span>
+                <button class="h-8 sm:h-9 px-4 sm:px-6 rounded-pill bg-brand-primary text-content-primary font-semibold text-[11px] sm:text-xs transition-all hover:bg-brand-hover shrink-0">
                   Confirm &amp; Proceed
                 </button>
               </div>
@@ -729,74 +764,74 @@
   <!-- ========================================================================
        8. MINIMAL FAQ ACCORDION (1040px Narrow, 14x9px Chevrons)
        ======================================================================== -->
-  <section class="w-full py-20 md:py-28 px-6 md:px-14 flex flex-col items-center bg-surface-canvas" id="faq">
-    <div class="max-w-[1280px] w-full mx-auto flex flex-col items-center gap-12">
+  <section class="w-full py-14 sm:py-20 md:py-28 px-4 sm:px-6 md:px-14 flex flex-col items-center bg-surface-canvas" id="faq">
+    <div class="max-w-[1280px] w-full mx-auto flex flex-col items-center gap-8 sm:gap-12">
       
-      <div class="flex flex-col items-center text-center max-w-[800px] gap-3">
-        <span class="text-xs md:text-sm font-semibold tracking-[2px] uppercase text-brand-deep">FREQUENTLY ASKED QUESTIONS</span>
-        <h2 class="text-3xl tablet:text-4xl desktop:text-[40px] font-semibold text-content-primary tracking-[-1.0px] leading-[1.25]">
+      <div class="flex flex-col items-center text-center max-w-[800px] gap-2.5 sm:gap-3 px-2">
+        <span class="text-[11px] sm:text-xs md:text-sm font-semibold tracking-[2px] uppercase text-brand-deep">FREQUENTLY ASKED QUESTIONS</span>
+        <h2 class="text-2xl sm:text-3xl tablet:text-4xl desktop:text-[40px] font-semibold text-content-primary tracking-[-0.6px] sm:tracking-[-1.0px] leading-[1.25]">
           Clear answers on participation &amp; workstreams
         </h2>
       </div>
 
-      <div class="w-full max-w-[1040px] mx-auto flex flex-col">
+      <div class="w-full max-w-[1040px] mx-auto flex flex-col divide-y divide-border-light">
         
         <!-- FAQ 1 -->
-        <div class="border-b border-border-light py-7 flex flex-col gap-3">
+        <div class="py-5 sm:py-7 flex flex-col gap-2.5 sm:gap-3">
           <button onclick="toggleFAQ(this)" class="w-full flex items-center justify-between text-left group">
-            <span class="text-lg md:text-xl font-medium text-content-primary group-hover:text-brand-deep transition-colors">
+            <span class="text-base sm:text-lg md:text-xl font-medium text-content-primary group-hover:text-brand-deep transition-colors pr-2">
               What qualifications do I need to join the Axiom specialist network?
             </span>
-            <svg class="w-4 h-2.5 text-content-primary rotate-180 transition-transform duration-200 shrink-0 ml-4" viewBox="0 0 14 9" fill="none" stroke="currentColor">
+            <svg class="w-4 h-2.5 text-content-primary rotate-180 transition-transform duration-200 shrink-0 ml-3" viewBox="0 0 14 9" fill="none" stroke="currentColor">
               <path d="M1 8L7 2L13 8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </button>
-          <div class="faq-content text-base md:text-lg text-content-secondary leading-relaxed pt-2">
+          <div class="faq-content text-sm sm:text-base md:text-lg text-content-secondary leading-relaxed pt-1 sm:pt-2">
             We seek specialists with advanced domain experience across computer science, engineering, physics, mathematics, and linguistics. Typical contributors include graduate researchers, PhD candidates, university faculty, and industry staff engineers.
           </div>
         </div>
 
         <!-- FAQ 2 -->
-        <div class="border-b border-border-light py-7 flex flex-col gap-3">
+        <div class="py-5 sm:py-7 flex flex-col gap-2.5 sm:gap-3">
           <button onclick="toggleFAQ(this)" class="w-full flex items-center justify-between text-left group">
-            <span class="text-lg md:text-xl font-medium text-content-primary group-hover:text-brand-deep transition-colors">
+            <span class="text-base sm:text-lg md:text-xl font-medium text-content-primary group-hover:text-brand-deep transition-colors pr-2">
               How does compensation and disbursement work?
             </span>
-            <svg class="w-4 h-2.5 text-content-primary transition-transform duration-200 shrink-0 ml-4" viewBox="0 0 14 9" fill="none" stroke="currentColor">
+            <svg class="w-4 h-2.5 text-content-primary transition-transform duration-200 shrink-0 ml-3" viewBox="0 0 14 9" fill="none" stroke="currentColor">
               <path d="M1 1L7 7L13 1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </button>
-          <div class="faq-content hidden text-base md:text-lg text-content-secondary leading-relaxed pt-2">
+          <div class="faq-content hidden text-sm sm:text-base md:text-lg text-content-secondary leading-relaxed pt-1 sm:pt-2">
             Compensation is based on verified task complexity and hours contributed, disbursed automatically every week via direct deposit, PayPal, or global wire in your local currency.
           </div>
         </div>
 
         <!-- FAQ 3 -->
-        <div class="border-b border-border-light py-7 flex flex-col gap-3">
+        <div class="py-5 sm:py-7 flex flex-col gap-2.5 sm:gap-3">
           <button onclick="toggleFAQ(this)" class="w-full flex items-center justify-between text-left group">
-            <span class="text-lg md:text-xl font-medium text-content-primary group-hover:text-brand-deep transition-colors">
+            <span class="text-base sm:text-lg md:text-xl font-medium text-content-primary group-hover:text-brand-deep transition-colors pr-2">
               Are there minimum weekly hour requirements?
             </span>
-            <svg class="w-4 h-2.5 text-content-primary transition-transform duration-200 shrink-0 ml-4" viewBox="0 0 14 9" fill="none" stroke="currentColor">
+            <svg class="w-4 h-2.5 text-content-primary transition-transform duration-200 shrink-0 ml-3" viewBox="0 0 14 9" fill="none" stroke="currentColor">
               <path d="M1 1L7 7L13 1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </button>
-          <div class="faq-content hidden text-base md:text-lg text-content-secondary leading-relaxed pt-2">
+          <div class="faq-content hidden text-sm sm:text-base md:text-lg text-content-secondary leading-relaxed pt-1 sm:pt-2">
             None. You retain complete agency over when, where, and how much you contribute. Some specialists contribute 5 hours per week alongside full-time research, while others dedicate 30+ hours.
           </div>
         </div>
 
         <!-- FAQ 4 -->
-        <div class="border-b border-border-light py-7 flex flex-col gap-3">
+        <div class="py-5 sm:py-7 flex flex-col gap-2.5 sm:gap-3">
           <button onclick="toggleFAQ(this)" class="w-full flex items-center justify-between text-left group">
-            <span class="text-lg md:text-xl font-medium text-content-primary group-hover:text-brand-deep transition-colors">
+            <span class="text-base sm:text-lg md:text-xl font-medium text-content-primary group-hover:text-brand-deep transition-colors pr-2">
               What tools or developer environments are provided?
             </span>
-            <svg class="w-4 h-2.5 text-content-primary transition-transform duration-200 shrink-0 ml-4" viewBox="0 0 14 9" fill="none" stroke="currentColor">
+            <svg class="w-4 h-2.5 text-content-primary transition-transform duration-200 shrink-0 ml-3" viewBox="0 0 14 9" fill="none" stroke="currentColor">
               <path d="M1 1L7 7L13 1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </button>
-          <div class="faq-content hidden text-base md:text-lg text-content-secondary leading-relaxed pt-2">
+          <div class="faq-content hidden text-sm sm:text-base md:text-lg text-content-secondary leading-relaxed pt-1 sm:pt-2">
             Contributors receive direct browser-based access to our proprietary alignment workbench, GPU test clusters, and API access to frontier model checkpoints from leading partner labs.
           </div>
         </div>
@@ -807,73 +842,73 @@
   </section>
 
   <!-- ========================================================================
-       9. HORIZON GLOW BOTTOM CTA BANNER (36px Radius, 90deg Gradient)
+       9. HORIZON GLOW BOTTOM CTA BANNER (Responsive Banner Radius & Padding)
        ======================================================================== -->
-  <section class="w-full py-20 md:py-28 px-6 md:px-14 flex flex-col items-center bg-white" id="cta">
-    <div class="w-full max-w-[1160px] rounded-sub-banner bg-cta-horizon p-10 md:p-20 flex flex-col items-center text-center justify-center gap-10 border border-white/60 shadow-floating relative overflow-hidden">
+  <section class="w-full py-14 sm:py-20 md:py-28 px-4 sm:px-6 md:px-14 flex flex-col items-center bg-white" id="cta">
+    <div class="w-full max-w-[1160px] rounded-[24px] sm:rounded-[32px] md:rounded-sub-banner bg-cta-horizon py-10 px-5 sm:py-14 sm:px-8 md:py-20 md:px-20 flex flex-col items-center text-center justify-center gap-6 sm:gap-8 md:gap-10 border border-white/60 shadow-floating relative overflow-hidden">
       
-      <div class="absolute -top-20 -left-20 w-64 h-64 rounded-full bg-white/40 blur-2xl pointer-events-none" aria-hidden="true"></div>
+      <div class="absolute -top-20 -left-20 w-48 sm:w-64 h-48 sm:h-64 rounded-full bg-white/40 blur-2xl pointer-events-none" aria-hidden="true"></div>
 
-      <h2 class="text-3xl tablet:text-4xl desktop:text-[40px] font-semibold text-content-primary tracking-[-1.0px] leading-[1.25] max-w-[720px] relative z-10">
+      <h2 class="text-2xl sm:text-3xl tablet:text-4xl desktop:text-[40px] font-semibold text-content-primary tracking-[-0.6px] sm:tracking-[-1.0px] leading-[1.25] max-w-[720px] relative z-10 px-2">
         Ready to engineer the frontier of artificial cognition?
       </h2>
 
-      <a href="#" class="inline-flex items-center justify-center px-10 py-5 rounded-pill bg-content-primary text-white font-semibold text-lg transition-all duration-200 hover:bg-content-secondary hover:scale-[1.02] active:scale-[0.98] shadow-floating relative z-10">
+      <a href="#" class="w-full sm:w-auto max-w-xs inline-flex items-center justify-center px-8 sm:px-10 py-3.5 sm:py-5 rounded-pill bg-content-primary text-white font-semibold text-base sm:text-lg transition-all duration-200 hover:bg-content-secondary hover:scale-[1.02] active:scale-[0.98] shadow-floating relative z-10 text-center">
         Join the Specialist Network
       </a>
     </div>
   </section>
 
   <!-- ========================================================================
-       10. MULTI-COLUMN SUBSTRATE FOOTER (#CF6325 Link Accent)
+       10. MULTI-COLUMN SUBSTRATE FOOTER (Mobile 2-Column Responsive Grid)
        ======================================================================== -->
-  <footer class="w-full bg-footer-fade border-t border-border-hairline pt-20 pb-12 px-6 md:px-14 flex flex-col items-center">
-    <div class="max-w-[1280px] w-full mx-auto flex flex-col gap-16">
+  <footer class="w-full bg-footer-fade border-t border-border-hairline pt-14 sm:pt-20 pb-10 sm:pb-12 px-4 sm:px-6 md:px-14 flex flex-col items-center">
+    <div class="max-w-[1280px] w-full mx-auto flex flex-col gap-10 sm:gap-16">
       
-      <div class="w-full grid grid-cols-1 md:grid-cols-5 gap-12">
+      <div class="w-full grid grid-cols-2 md:grid-cols-5 gap-8 sm:gap-10 md:gap-12">
         
-        <div class="md:col-span-2 flex flex-col gap-5">
+        <div class="col-span-2 md:col-span-2 flex flex-col gap-4 sm:gap-5">
           <div class="flex items-center gap-2.5">
             <div class="w-7 h-7 rounded-lg bg-content-primary flex items-center justify-center">
               <div class="w-3 h-3 rounded-full bg-brand-primary"></div>
             </div>
             <span class="font-bold text-lg tracking-tight text-content-primary">AXIOM</span>
           </div>
-          <p class="text-sm text-content-tertiary max-w-sm leading-relaxed">
+          <p class="text-xs sm:text-sm text-content-tertiary max-w-sm leading-relaxed">
             The autonomous platform connecting world-class domain researchers with frontier AI labs to advance machine cognition and formal alignment.
           </p>
         </div>
 
-        <div class="flex flex-col gap-3.5">
-          <span class="font-semibold text-sm text-content-primary">Platform</span>
-          <a href="#" class="text-sm text-content-tertiary hover:text-brand-link transition-colors">Reasoning Benchmarks</a>
-          <a href="#" class="text-sm text-content-tertiary hover:text-brand-link transition-colors">Alignment Protocols</a>
-          <a href="#" class="text-sm text-content-tertiary hover:text-brand-link transition-colors">Specialist Workstreams</a>
-          <a href="#" class="text-sm text-content-tertiary hover:text-brand-link transition-colors">Model Evaluation</a>
+        <div class="flex flex-col gap-2.5 sm:gap-3.5">
+          <span class="font-semibold text-xs sm:text-sm text-content-primary">Platform</span>
+          <a href="#" class="text-xs sm:text-sm text-content-tertiary hover:text-brand-link transition-colors">Benchmarks</a>
+          <a href="#" class="text-xs sm:text-sm text-content-tertiary hover:text-brand-link transition-colors">Protocols</a>
+          <a href="#" class="text-xs sm:text-sm text-content-tertiary hover:text-brand-link transition-colors">Workstreams</a>
+          <a href="#" class="text-xs sm:text-sm text-content-tertiary hover:text-brand-link transition-colors">Evaluation</a>
         </div>
 
-        <div class="flex flex-col gap-3.5">
-          <span class="font-semibold text-sm text-content-primary">Domains</span>
-          <a href="#" class="text-sm text-content-tertiary hover:text-brand-link transition-colors">Distributed Systems</a>
-          <a href="#" class="text-sm text-content-tertiary hover:text-brand-link transition-colors">Pure Mathematics</a>
-          <a href="#" class="text-sm text-content-tertiary hover:text-brand-link transition-colors">Quantum Information</a>
-          <a href="#" class="text-sm text-content-tertiary hover:text-brand-link transition-colors">Formal Linguistics</a>
+        <div class="flex flex-col gap-2.5 sm:gap-3.5">
+          <span class="font-semibold text-xs sm:text-sm text-content-primary">Domains</span>
+          <a href="#" class="text-xs sm:text-sm text-content-tertiary hover:text-brand-link transition-colors">Distributed Systems</a>
+          <a href="#" class="text-xs sm:text-sm text-content-tertiary hover:text-brand-link transition-colors">Pure Mathematics</a>
+          <a href="#" class="text-xs sm:text-sm text-content-tertiary hover:text-brand-link transition-colors">Quantum Information</a>
+          <a href="#" class="text-xs sm:text-sm text-content-tertiary hover:text-brand-link transition-colors">Formal Linguistics</a>
         </div>
 
-        <div class="flex flex-col gap-3.5">
-          <span class="font-semibold text-sm text-content-primary">Company</span>
-          <a href="#" class="text-sm text-content-tertiary hover:text-brand-link transition-colors">About Us</a>
-          <a href="#" class="text-sm text-content-tertiary hover:text-brand-link transition-colors">Research Publications</a>
-          <a href="#" class="text-sm text-content-tertiary hover:text-brand-link transition-colors">Community Standards</a>
-          <a href="#" class="text-sm text-content-tertiary hover:text-brand-link transition-colors">Contact</a>
+        <div class="col-span-2 sm:col-span-1 flex flex-col gap-2.5 sm:gap-3.5">
+          <span class="font-semibold text-xs sm:text-sm text-content-primary">Company</span>
+          <a href="#" class="text-xs sm:text-sm text-content-tertiary hover:text-brand-link transition-colors">About Us</a>
+          <a href="#" class="text-xs sm:text-sm text-content-tertiary hover:text-brand-link transition-colors">Publications</a>
+          <a href="#" class="text-xs sm:text-sm text-content-tertiary hover:text-brand-link transition-colors">Standards</a>
+          <a href="#" class="text-xs sm:text-sm text-content-tertiary hover:text-brand-link transition-colors">Contact</a>
         </div>
 
       </div>
 
-      <div class="w-full pt-8 border-t border-border-hairline flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-mono text-content-subtle">
+      <div class="w-full pt-6 sm:pt-8 border-t border-border-hairline flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] sm:text-xs font-mono text-content-subtle text-center sm:text-left">
         <span>&copy; 2026 Axiom Autonomous Systems Inc. All rights reserved.</span>
         
-        <div class="flex items-center gap-6">
+        <div class="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
           <a href="#" class="hover:text-brand-link transition-colors">Security &amp; Privacy</a>
           <a href="#" class="hover:text-brand-link transition-colors">Terms of Service</a>
           <a href="#" class="hover:text-brand-link transition-colors">Provenance Ledger</a>
@@ -883,8 +918,9 @@
     </div>
   </footer>
 
-  <!-- Interactive JavaScript for Live Demonstration -->
+  <!-- Interactive JavaScript -->
   <script>
+    // Tab Switching for Operational Workbench
     const tabData = [
       {
         title: "Craft High-Entropy Stress Cases",
@@ -910,16 +946,70 @@
       for (let i = 0; i < 3; i++) {
         const btn = document.getElementById('tab-' + i);
         if (i === idx) {
-          btn.className = "flex-1 h-full rounded-pill bg-white shadow-subtle flex items-center justify-center px-4 font-medium text-base md:text-lg text-content-primary transition-all duration-200";
+          btn.className = "tab-button w-full sm:flex-1 py-2.5 sm:py-3.5 md:py-4 px-3 sm:px-4 rounded-xl md:rounded-pill bg-white shadow-subtle flex items-center justify-center font-medium text-xs sm:text-sm md:text-base text-content-primary transition-all duration-200 text-center";
         } else {
-          btn.className = "flex-1 h-full rounded-pill bg-transparent hover:bg-white/50 flex items-center justify-center px-4 font-medium text-base md:text-lg text-content-muted transition-all duration-200";
+          btn.className = "tab-button w-full sm:flex-1 py-2.5 sm:py-3.5 md:py-4 px-3 sm:px-4 rounded-xl md:rounded-pill bg-transparent hover:bg-white/50 flex items-center justify-center font-medium text-xs sm:text-sm md:text-base text-content-muted transition-all duration-200 text-center";
         }
       }
       const data = tabData[idx];
       document.getElementById('tab-title').textContent = data.title;
       document.getElementById('tab-subtitle').textContent = data.subtitle;
+      document.getElementById('tab-why').textContent = data.why;
+      document.getElementById('tab-how').textContent = data.how;
     }
 
+    // Interactive Step Selection
+    const stepData = {
+      1: { title: "Domain Clearance Verification", badge: "99.4% Match", status: "Passed (Top 1%)", bar: "96%" },
+      2: { title: "Live Rubric Assessment", badge: "Score: 98/100", status: "Certified Tier-1", bar: "98%" },
+      3: { title: "Cryptographic Provenance", badge: "KYC Verified", status: "ZK-Attested", bar: "100%" },
+      4: { title: "Sprint Allocation Active", badge: "3 Streams Ready", status: "Immediate Payout", bar: "100%" }
+    };
+
+    function selectStep(stepNum) {
+      for (let i = 1; i <= 4; i++) {
+        const el = document.getElementById('step-card-' + i);
+        if (i === stepNum) {
+          el.className = "step-card p-4 sm:p-6 rounded-xl md:rounded-card bg-surface-light-100 border-l-4 border-brand-primary shadow-subtle flex items-start gap-4 sm:gap-5 transition-all cursor-pointer";
+          el.querySelector('span').className = "font-mono text-xl sm:text-2xl font-bold text-brand-deep";
+          el.querySelector('h5').className = "text-base sm:text-lg font-semibold text-content-primary";
+        } else {
+          el.className = "step-card p-4 sm:p-6 rounded-xl md:rounded-card bg-white border border-border-hairline flex items-start gap-4 sm:gap-5 hover:bg-surface-light-50 transition-colors cursor-pointer";
+          el.querySelector('span').className = "font-mono text-xl sm:text-2xl font-bold text-content-muted";
+          el.querySelector('h5').className = "text-base sm:text-lg font-semibold text-content-secondary";
+        }
+      }
+      const d = stepData[stepNum];
+      document.getElementById('preview-title').textContent = d.title;
+      document.getElementById('preview-badge').textContent = d.badge;
+      document.getElementById('preview-status').textContent = d.status;
+      document.getElementById('preview-bar').style.width = d.bar;
+    }
+
+    // Carousel Navigation
+    function scrollCarousel(dir) {
+      const track = document.getElementById('testimonials-track');
+      const cardWidth = track.firstElementChild ? track.firstElementChild.offsetWidth + 24 : 320;
+      track.scrollBy({ left: dir * cardWidth, behavior: 'smooth' });
+    }
+
+    // Mobile Hamburger Menu Toggle
+    function toggleMobileNav() {
+      const drawer = document.getElementById('mobile-nav-drawer');
+      const hamburger = document.getElementById('hamburger-icon');
+      const close = document.getElementById('close-icon');
+      if (drawer.classList.contains('hidden')) {
+        drawer.classList.remove('hidden');
+        hamburger.classList.add('hidden');
+        close.classList.remove('hidden');
+      } else {
+        drawer.classList.add('hidden');
+        hamburger.classList.remove('hidden');
+        close.classList.add('hidden');
+      }
+    }
+
+    // FAQ Accordion Toggle
     function toggleFAQ(button) {
       const content = button.nextElementSibling;
       const chevron = button.querySelector('svg');
